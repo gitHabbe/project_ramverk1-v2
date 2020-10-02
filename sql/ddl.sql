@@ -15,9 +15,9 @@ CREATE TABLE User (
     "id" INTEGER PRIMARY KEY NOT NULL,
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "qoute" TEXT,
     "gravitar" TEXT,
+    "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "deleted_at" TIMESTAMP DEFAULT NULL
 
     -- edited_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,

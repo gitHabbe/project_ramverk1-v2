@@ -14,13 +14,16 @@ class UserController implements ContainerInjectableInterface
     {
         $response = $this->di->get("response");
         $session = $this->di->get("session");
-        $user = $session->get("user");
-        if (!$user) {
+        $sessionUser = $session->get("user");
+        $user = new User\User();
+        $user->setDb($this->di->get("dbqb"));
+        $user = $user->findById($sessionUser["id"]);
+        if (!$sessionUser["id"]) {
             return $response->redirect("user/login");
         }
         $page = $this->di->get("page");
         $page->add("hab/dashboard/default", ["user" => $user]);
-        $title = $user . " - Dashboard";
+        $title = $user->username . " - Dashboard";
 
         return $page->render(["title" => $title]);
     }
@@ -29,7 +32,7 @@ class UserController implements ContainerInjectableInterface
     {
         $response = $this->di->get("response");
         $session = $this->di->get("session");
-        if ($session->get("user")) {
+        if ($session->get("user")["id"]) {
             return $response->redirect("");
         }
         $page = $this->di->get("page");
@@ -50,7 +53,7 @@ class UserController implements ContainerInjectableInterface
         if (!$user->verifyPassword($username, $password)) {
             return "username or password wrong";
         }
-        $session->set("user", $username);
+        $session->set("user", ["user"=>$username, "id"=>$user->id]);
 
         return $response->redirect("");
     }

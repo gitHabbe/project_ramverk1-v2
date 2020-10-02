@@ -4,6 +4,7 @@
 DROP TABLE IF EXISTS User;
 DROP TABLE IF EXISTS Thread;
 DROP TABLE IF EXISTS Tag;
+DROP TABLE IF EXISTS Comment;
 
 
 
@@ -17,12 +18,26 @@ CREATE TABLE User (
 -- CREATE THREAD TABLE
 CREATE TABLE Thread (
     "id" INTEGER PRIMARY KEY NOT NULL,
+    user_id INTEGER,
     "topic" TEXT NOT NULL,
     "content" TEXT NOT NULL,
+
+    FOREIGN KEY(user_id) REFERENCES User(id),
 );
 
 -- CREATE TAG TABLE
 CREATE TABLE Tag (
     "id" INTEGER PRIMARY KEY NOT NULL,
     "name" TEXT NOT NULL,
+);
+
+-- CREATE TAG TABLE
+CREATE TABLE Comment (
+    "id" INTEGER PRIMARY KEY NOT NULL,
+    thread_id INTEGER,
+    user_id INTEGER,
+    "name" TEXT NOT NULL,
+
+    FOREIGN KEY(thread_id) REFERENCES Thread(id),
+    FOREIGN KEY(user_id) REFERENCES User(id),
 );

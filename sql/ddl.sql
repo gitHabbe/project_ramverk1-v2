@@ -21,6 +21,7 @@ CREATE TABLE Thread (
     user_id INTEGER,
     "topic" TEXT NOT NULL,
     "content" TEXT NOT NULL,
+    "points" INTEGER DEFAULT 1,
 
     FOREIGN KEY(user_id) REFERENCES User(id),
 );
@@ -37,6 +38,7 @@ CREATE TABLE Comment (
     thread_id INTEGER,
     user_id INTEGER,
     "name" TEXT NOT NULL,
+    "points" INTEGER DEFAULT 1,
 
     FOREIGN KEY(thread_id) REFERENCES Thread(id),
     FOREIGN KEY(user_id) REFERENCES User(id),

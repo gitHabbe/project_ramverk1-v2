@@ -41,13 +41,4 @@ class ThreadController implements ContainerInjectableInterface
 
         return $page->render(["title" => "All threads"]);
     }
-
-    // public function allComments(int $thread_id)
-    // {
-    //     $comment = new Comment\Comment();
-    //     $comment->setDb($this->di->get("dbqb"));
-    //     $comments = $comment->find("thread_id", $where_id);
-
-    //     return $comments;
-    // }
 }

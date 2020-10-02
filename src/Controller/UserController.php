@@ -96,4 +96,20 @@ class UserController implements ContainerInjectableInterface
 
         return $response->redirect("user/login");
     }
+
+    public function editActionGet()
+    {
+        $session = $this->di->get("session");
+        $userSession = $session->get("user");
+        if (!$userSession["id"]) {
+            return $response->redirect("user/login");
+        }
+        $user = new User\User();
+        $user->setDb($this->di->get("dbqb"));
+        $id = $user->findById($userSession["id"]);
+        $page = $this->di->get("page");
+        $page->add("hab/dashboard/edit-user", ["user" => $user]);
+
+        return $page->render(["title" => "Edit user"]);
+    }
 }

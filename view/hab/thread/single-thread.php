@@ -9,6 +9,6 @@ namespace Anax\View;
 
 <ul>
     <?php foreach ($comments as $comment) : ?>
-        <p><?= $comment->name ?></p>
+        <p>COMMENT: <?= $comment->name ?> POINTS: <?= $comment->points ?></p>
     <?php endforeach; ?>
 </ul>

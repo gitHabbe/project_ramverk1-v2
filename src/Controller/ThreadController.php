@@ -21,21 +21,18 @@ class ThreadController implements ContainerInjectableInterface
 
         return $page->render(["title" => "All threads"]);
     }
-
-    public function allComments(int $thread_id)
-    {
-        $comment = new Comment\Comment();
-        $comment->setDb($this->di->get("dbqb"));
-        return $comment->findAllWhere("thread_id = ?", $thread_id);
-    }
-
+    
     public function idActionGet(int $id)
     {
         $page = $this->di->get("page");
         $thread = new Thread\Thread();
         $thread->setDb($this->di->get("dbqb"));
         $thread = $thread->findById($id);
-        $comments = $this->allComments($id);
+        $comment = new Comment\Comment();
+        $comment->setDb($this->di->get("dbqb"));
+        $comments = $comment->findAllWhereJoin("thread_id = ?", $id, "User", "User.id=user_id");
+        // var_dump($comments);
+        // die();
 
         $page->add("hab/thread/single-thread", ["thread" => $thread, "comments" => $comments]);
 

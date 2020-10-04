@@ -10,5 +10,6 @@ namespace Anax\View;
 <ul>
     <?php foreach ($comments as $comment) : ?>
         <p>COMMENT: <?= $comment->name ?> POINTS: <?= $comment->points ?></p>
+        <p>User: <?= $comment->username ?> Quote: <?= $comment->quote ?></p>
     <?php endforeach; ?>
 </ul>

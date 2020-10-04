@@ -6,6 +6,8 @@ DROP TABLE IF EXISTS Thread;
 DROP TABLE IF EXISTS Tag;
 DROP TABLE IF EXISTS Comment;
 DROP TABLE IF EXISTS Tag_2_Thread;
+DROP TABLE IF EXISTS Point_2_Thread;
+DROP TABLE IF EXISTS Point_2_Comment;
 DROP TABLE IF EXISTS Answer;
 
 
@@ -69,6 +71,27 @@ CREATE TABLE Tag_2_Thread (
 
     FOREIGN KEY(thread_id) REFERENCES Thread(id),
     FOREIGN KEY(tag_id) REFERENCES Tag(id)
+);
+
+-- CREATE POINT_2_THREAD TABLE
+CREATE TABLE Point_2_Thread (
+    "id" INTEGER PRIMARY KEY NOT NULL,
+    "positive" INTEGER,
+    thread_id INTEGER,
+    user_id INTEGER,
+
+    FOREIGN KEY(thread_id) REFERENCES Thread(id),
+    FOREIGN KEY(user_id) REFERENCES User(id)
+);
+
+-- CREATE POINT_2_COMMENT TABLE
+CREATE TABLE Point_2_Comment (
+    "id" INTEGER PRIMARY KEY NOT NULL,
+    comment_id INTEGER,
+    user_id INTEGER,
+
+    FOREIGN KEY(comment_id) REFERENCES Comment(id),
+    FOREIGN KEY(user_id) REFERENCES User(id)
 );
 
 -- CREATE ANSWER TABLE

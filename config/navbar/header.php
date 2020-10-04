@@ -15,9 +15,14 @@ return [
             "title" => "Första sidan, börja här.",
         ],
         [
+            "text" => "Trådar",
+            "url" => "thread",
+            "title" => "Trådar",
+        ],
+        [
             "text" => "Om",
             "url" => "om",
-            "title" => "Om denna webbplats.",
+            "title" => "Om oss",
         ]
     ],
 ];

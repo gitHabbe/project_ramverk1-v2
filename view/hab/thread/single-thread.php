@@ -39,16 +39,16 @@ namespace Anax\View;
 
 <script>
 
-document.querySelector(".vote-up").addEventListener("click", changePoints);
-document.querySelector(".vote-down").addEventListener("click", changePoints);
+// document.querySelector(".vote-up").addEventListener("click", changePoints);
+// document.querySelector(".vote-down").addEventListener("click", changePoints);
 
-function changePoints(e) {
-    var points = document.querySelector(".points");
-    var test = e.target.classList.contains("vote-up");
-    if (test) {
-        points.innerHTML = parseInt(points.innerHTML) + 1;
-    } else {
-        points.innerHTML = parseInt(points.innerHTML) - 1;
-    }
-}
+// function changePoints(e) {
+//     var points = document.querySelector(".points");
+//     var test = e.target.classList.contains("vote-up");
+//     if (test) {
+//         points.innerHTML = parseInt(points.innerHTML) + 1;
+//     } else {
+//         points.innerHTML = parseInt(points.innerHTML) - 1;
+//     }
+// }
 </script>

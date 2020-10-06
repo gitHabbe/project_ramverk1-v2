@@ -20,7 +20,14 @@ INSERT INTO User ("username", "password", "quote") VALUES
     ('gschuberti', 'utS3kZb3p6', 'Synergized actuating emulation'),
     ('jbenyonj', 'RYSyhyPae', 'Team-oriented 3rd generation array')
 ;
-INSERT INTO Tag ("name") VALUES ("asdf");
+INSERT INTO Tag ("name") VALUES
+    ("hero"),
+    ("villain"),
+    ("wondering"),
+    ("theboys"),
+    ("seven"),
+    ("cast")
+;
 
 INSERT INTO Thread ("user_id", "topic", "content") VALUES
     (8, 'Quisque ut erat. Curabitur gravida nisi at nibh.', 'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.'),

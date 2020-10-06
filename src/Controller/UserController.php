@@ -15,6 +15,8 @@ class UserController implements ContainerInjectableInterface
         $response = $this->di->get("response");
         $session = $this->di->get("session");
         $sessionUser = $session->get("user");
+        var_dump($sessionUser);
+        die();
         $user = new User\User();
         $user->setDb($this->di->get("dbqb"));
         $user = $user->findById($sessionUser["id"]);
@@ -53,7 +55,7 @@ class UserController implements ContainerInjectableInterface
         if (!$user->verifyPassword($username, $password)) {
             return "username or password wrong";
         }
-        $session->set("user", ["user"=>$username, "id"=>$user->id]);
+        $session->set("user", ["user" => $username, "id" => $user->id]);
 
         return $response->redirect("");
     }

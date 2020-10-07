@@ -78,7 +78,6 @@ class ThreadController implements ContainerInjectableInterface
             $tag2thread->tag_id = $tagDb->id;
             $tag2thread->save();
         }
-        // die();
 
         return $response->redirect("thread/id/" . $thread->id);
     }
@@ -90,7 +89,9 @@ class ThreadController implements ContainerInjectableInterface
         $user = $session->get("user", null);
         $thread = new Thread\Thread();
         $thread->setDb($this->di->get("dbqb"));
-        $thread = $thread->findById($id);
+        // $thread = $thread->findById($id);
+        $thread = $thread->findAllWhereJoin("Thread.id = ?", $id, "User", "User.id = user_id");
+        $thread = $thread[0];
         $comment = new Comment\Comment();
         $comment->setDb($this->di->get("dbqb"));
         $comments = $comment->findAllWhereJoin("thread_id = ?", $id, "User", "User.id=user_id");

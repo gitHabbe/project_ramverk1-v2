@@ -6938,7 +6938,8 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 /**
  * My settings.
  */
-.thread {
+.thread,
+.comment {
   margin: 10px;
   border: #111 1px solid;
   min-height: 300px;
@@ -6955,18 +6956,24 @@ a.rm-button.rm-clicked .rm-button-face-2 {
   margin: 0 auto;
   width: 130px;
 }
-.thread-points {
+.thread-points,
+.comment-points {
   display: flex;
   justify-content: center;
   align-items: baseline;
 }
-.thread-points.thread-points > * {
+.thread-points.thread-points > *,
+.thread-points.comment-points > *,
+.comment-points.thread-points > *,
+.comment-points.comment-points > * {
   font-size: 30px;
   margin: 0 4px;
 }
-.thread-points .vote-up {
+.thread-points .vote-up,
+.comment-points .vote-up {
   color: green;
 }
-.thread-points .vote-down {
+.thread-points .vote-down,
+.comment-points .vote-down {
   color: red;
 }

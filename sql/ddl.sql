@@ -31,7 +31,7 @@ CREATE TABLE Thread (
     user_id INTEGER,
     "topic" TEXT NOT NULL,
     "content" TEXT NOT NULL,
-    "points" INTEGER DEFAULT 1,
+    "points" INTEGER DEFAULT 0,
     "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "deleted_at" TIMESTAMP DEFAULT NULL,
 
@@ -54,7 +54,7 @@ CREATE TABLE Comment (
     thread_id INTEGER,
     user_id INTEGER,
     "name" TEXT NOT NULL,
-    "points" INTEGER DEFAULT 1,
+    "points" INTEGER DEFAULT 0,
     "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "deleted_at" TIMESTAMP DEFAULT NULL,
 
@@ -87,6 +87,7 @@ CREATE TABLE Point_2_Thread (
 -- CREATE POINT_2_COMMENT TABLE
 CREATE TABLE Point_2_Comment (
     "id" INTEGER PRIMARY KEY NOT NULL,
+    "positive" INTEGER,
     comment_id INTEGER,
     user_id INTEGER,
 

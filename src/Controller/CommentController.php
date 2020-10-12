@@ -21,6 +21,8 @@ class CommentController implements ContainerInjectableInterface
             return "AUTH";
         }
         $vote = $request->getPost("comment-vote");
+        $thread_id = $request->getPost("threadid");
+        var_dump($id);
         $vote = $vote === "up" ? 1 : -1;
         $p2c = new Point_2_Comment\Point_2_Comment();
         $p2c->setDb($this->di->get("dbqb"));
@@ -28,5 +30,23 @@ class CommentController implements ContainerInjectableInterface
         if ($vote === intval($p2c->positive)) {
             return "CANT";
         }
+        $comment = new Comment\Comment();
+        $comment->setDb($this->di->get("dbqb"));
+        $comment = $comment->findById($id);
+        if ($p2c->id == null) {
+            $p2c = new Point_2_Comment\Point_2_Comment();
+            $p2c->setDb($this->di->get("dbqb"));
+            $p2c->user_id = intval($user["id"]);
+            $p2c->comment_id = $id;
+            $comment->points = intval($comment->points) + $vote;
+        } else {
+            $comment->points = intval($comment->points) + (2 * $vote);
+        }
+        $p2c->positive = $vote;
+        $comment->save();
+        $p2c->save();
+        $response = $this->di->get("response");
+
+        return $response->redirect("thread/id/" . $thread_id);
     }
 }

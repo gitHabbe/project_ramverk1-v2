@@ -22,6 +22,7 @@ class Point_2_Thread extends ActiveRecordModel
      * @var integer $id primary key auto incremented.
      */
     public $id;
+    public $positive;
     public $thread_id;
     public $user_id;
     

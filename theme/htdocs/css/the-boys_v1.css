@@ -6938,18 +6938,29 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 /**
  * My settings.
  */
+.thread {
+  display: flex;
+}
 .thread,
 .comment {
   margin: 10px;
   border: #111 1px solid;
   min-height: 300px;
 }
+.user {
+  text-align: center;
+}
+.thread-content {
+  width: 73%;
+}
 .profile {
-  width: 30%;
+  width: 27%;
+}
+.profile {
+  float: left;
   border: #111 1px solid;
   margin: 10px;
   padding: 20px;
-  text-align: left;
 }
 .profile .picture {
   display: block;

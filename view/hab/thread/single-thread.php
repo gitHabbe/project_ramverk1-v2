@@ -3,7 +3,8 @@
 namespace Anax\View;
 
 
-// var_dump($thread);
+// var_dump($realThread->id);
+// var_dump($my_html);
 // die();
 ?>
 
@@ -12,7 +13,7 @@ namespace Anax\View;
         <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" alt="User Picture" class="picture">
         <div class="user"><?= $thread->username ?></div>
         <div class="thread-points">
-            <form action="<?= $this->di->url->create("thread/point/" . $thread->id) ?>" method="post">
+            <form action="<?= $this->di->url->create("thread/point/" . $realThread->id) ?>" method="post">
                 <button type="submit" name="thread-vote" value="up">
                     <i class="fas fa-arrow-circle-up vote-up"></i>
                 </button>
@@ -23,17 +24,21 @@ namespace Anax\View;
             </form>
         </div>
     </div>
-    <div class="topic"><?= $thread->topic ?></div>
-    <div class="content"><?= $thread->content ?></div>
+    <div class="thread-content">
+        <div class="topic"><?= "TITLE: " . $thread->topic ?></div>
+        <div class="content"><?= $my_html ?></div>
+    </div>
 </div>
-
-<?php foreach ($comments as $comment) : ?>
+<?php $i = 0; ?>
+<?php foreach ($comments2 as $comment) : ?>
     <div class="comment">
         <div class="profile">
             <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" alt="User Picture" class="picture">
-            <div class="user"><?= $comment->username ?></div>
+            <div class="user"><?= $comments[$i]->username ?></div>
             <div class="comment-points">
+            <!-- <div class=""><?= $comment->id ?></div> -->
                 <form action="<?= $this->di->url->create("comment/point/" . $comment->id) ?>" method="post">
+                    <input style="display:none;" value="<?= $realThread->id ?>" type="text" name="threadid">
                     <button type="submit" name="comment-vote" value="up">
                         <i class="fas fa-arrow-circle-up vote-up"></i>
                     </button>
@@ -46,6 +51,7 @@ namespace Anax\View;
         </div>
         <div class="content"><?= $comment->name ?></div>
     </div>
+    <?php $i += 1; ?>
 <?php endforeach; ?>
 
 <script>

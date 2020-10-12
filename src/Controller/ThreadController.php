@@ -9,6 +9,7 @@ use Hab\Comment;
 use Hab\Point_2_Thread;
 use Hab\Tag;
 use Hab\Tag_2_Thread;
+use \Michelf\Markdown;
 
 class ThreadController implements ContainerInjectableInterface
 {
@@ -61,7 +62,7 @@ class ThreadController implements ContainerInjectableInterface
         $thread->user_id = $user["id"];
         $thread->content = $content;
         $thread->topic = $topic;
-        $thread->points = 1;
+        $thread->points = 0;
         $thread->created_at = date('Y-m-d H:i:s');
         $thread->save();
         $tags = $request->getPost("tags");
@@ -87,20 +88,27 @@ class ThreadController implements ContainerInjectableInterface
         $session = $this->di->get("session");
         $page = $this->di->get("page");
         $user = $session->get("user", null);
+        $realThread = new Thread\Thread();
+        $realThread->setDb($this->di->get("dbqb"));
         $thread = new Thread\Thread();
         $thread->setDb($this->di->get("dbqb"));
-        // $thread = $thread->findById($id);
-        $thread = $thread->findAllWhereJoin("Thread.id = ?", $id, "User", "User.id = user_id");
+        $thread2 = new Thread\Thread();
+        $thread2->setDb($this->di->get("dbqb"));
+        $comments2 = $thread2->findAllWhereJoin("Thread.id = ?", $id, "Comment", "Comment.thread_id = Thread.id");
+        $thread = $thread->findAllWhereJoin("Thread.id = ?", $id, "User", "User.id = Thread.user_id");
         $thread = $thread[0];
+        $realThread = $realThread->findById($id);
         $comment = new Comment\Comment();
         $comment->setDb($this->di->get("dbqb"));
         $comments = $comment->findAllWhereJoin("thread_id = ?", $id, "User", "User.id=user_id");
-        // $p2t = new Point_2_Thread\Point_2_Thread();
-        // $p2t->setDb($this->di->get("dbqb"));
+        $my_html = Markdown::defaultTransform($realThread->content);
         $data = [
             "thread" => $thread,
+            "realThread" => $realThread,
             "comments" => $comments,
+            "comments2" => $comments2,
             "user" => $user,
+            "my_html" => $my_html,
         ];
         $page->add("hab/thread/single-thread", $data);
 
@@ -135,6 +143,9 @@ class ThreadController implements ContainerInjectableInterface
         } else {
             $thread->points = intval($thread->points) + (2 * $vote);
         }
+        // var_dump($thread);
+        // var_dump($id);
+        // die();
         $p2t->positive = $vote;
         $thread->save();
         $p2t->save();

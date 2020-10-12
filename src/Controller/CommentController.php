@@ -7,10 +7,34 @@ use Anax\Commons\ContainerInjectableTrait;
 use Hab\User;
 use Hab\Comment;
 use Hab\Point_2_Comment;
+use \Michelf\Markdown;
 
 class CommentController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
+
+    public function newActionPost(int $id)
+    {
+        $request = $this->di->get("request");
+        $session = $this->di->get("session");
+        $user = $session->get("user");
+        $user = $session->get("user", null);
+        if ($user === null) {
+            return "AUTH";
+        }
+        $commentName = $request->getPost("comment");
+        $comment = new Comment\Comment();
+        $comment->setDb($this->di->get("dbqb"));
+        $comment->thread_id = $id;
+        $comment->user_id = $user["id"];
+        $comment->name = $commentName;
+        $comment->points = 0;
+        $comment->save();
+        $response = $this->di->get("response");
+
+        return $response->redirect("thread/id/" . $id);
+
+    }
 
     public function pointActionPost(int $id)
     {

@@ -101,6 +101,11 @@ class ThreadController implements ContainerInjectableInterface
         $comment = new Comment\Comment();
         $comment->setDb($this->di->get("dbqb"));
         $comments = $comment->findAllWhereJoin("thread_id = ?", $id, "User", "User.id=user_id");
+        $tags = new Tag_2_Thread\Tag_2_Thread();
+        $tags->setDb($this->di->get("dbqb"));
+        $tags = $tags->findAllWhereJoin("thread_id = ?", $id, "Tag", "Tag.id = tag_id");
+        // var_dump($tags);
+        // die();
         $my_html = Markdown::defaultTransform($realThread->content);
         $data = [
             "thread" => $thread,
@@ -108,6 +113,7 @@ class ThreadController implements ContainerInjectableInterface
             "comments" => $comments,
             "comments2" => $comments2,
             "user" => $user,
+            "tags" => $tags,
             "my_html" => $my_html,
         ];
         $page->add("hab/thread/single-thread", $data);

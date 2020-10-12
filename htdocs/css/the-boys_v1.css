@@ -6941,9 +6941,18 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 .thread {
   display: flex;
 }
+.topic {
+  margin-top: 10px;
+  text-decoration: underline;
+  font-size: 20px;
+}
+.thread-tag {
+  color: #2783b9;
+  text-decoration: none;
+}
 .thread,
 .comment {
-  margin: 10px;
+  margin: 10px 0;
   border: #111 1px solid;
   min-height: 300px;
 }

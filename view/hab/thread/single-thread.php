@@ -26,9 +26,19 @@ namespace Anax\View;
     </div>
     <div class="thread-content">
         <div class="topic"><?= "TITLE: " . $thread->topic ?></div>
+        <?php foreach ($tags as $tag) : ?>
+            <span><a href="" class="thread-tag"><?= "#" . $tag->name ?></a></span>
+        <?php endforeach; ?>
         <div class="content"><?= $my_html ?></div>
     </div>
 </div>
+<?php if($user["id"]) : ?>
+    <form action="<?= $this->di->url->create("comment/new/" . $realThread->id) ?>" method="post">
+        <textarea value="" name="comment" cols="30" rows="10">
+        </textarea>
+        <button type="submit">Post comment</button>
+    </form>
+<?php endif; ?>
 <?php $i = 0; ?>
 <?php foreach ($comments2 as $comment) : ?>
     <div class="comment">

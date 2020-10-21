@@ -47,8 +47,14 @@ function getGravatar($user) {
         <div class="profile">
             <img src="<?= getGravatar($comments[$i]) ?>" alt="User Picture" class="picture">
             <div class="user"><?= $comments[$i]->username ?></div>
+                <form action="<?= $this->di->url->create("comment/answer/") ?>" method="post">
+                    <input style="display:none;" value="<?= $realThread->id ?>" type="text" name="threadid">
+                    <input style="display:none;" value="<?= $comment->id ?>" type="text" name="commentid">
+                    <button type="submit" name="comment-vote" value="up">
+                        <i class="fas fa-check-square"></i>
+                    </button>
+                </form>
             <div class="comment-points">
-            <!-- <div class=""><?= $comment->id ?></div> -->
                 <form action="<?= $this->di->url->create("comment/point/" . $comment->id) ?>" method="post">
                     <input style="display:none;" value="<?= $realThread->id ?>" type="text" name="threadid">
                     <button type="submit" name="comment-vote" value="up">

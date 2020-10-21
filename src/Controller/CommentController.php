@@ -83,4 +83,14 @@ class CommentController implements ContainerInjectableInterface
 
         return $response->redirect("thread/id/" . $thread_id);
     }
+
+    public function answerActionPost()
+    {
+        $request = $this->di->get("request");
+        $thread = $request->getPost("commentid");
+        $comment = $request->getPost("threadid");
+        var_dump($comment);
+        var_dump($thread);
+        die();
+    }
 }

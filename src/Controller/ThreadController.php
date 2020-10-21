@@ -11,6 +11,7 @@ use Hab\User;
 use Hab\Tag;
 use Hab\Tag_2_Thread;
 use Hab\Point_2_User;
+use Hab\Answer;
 use \Michelf\Markdown;
 
 class ThreadController implements ContainerInjectableInterface
@@ -99,6 +100,10 @@ class ThreadController implements ContainerInjectableInterface
         $realThread->setDb($this->di->get("dbqb"));
         $thread = new Thread\Thread();
         $thread->setDb($this->di->get("dbqb"));
+        $answer = new Answer\Answer();
+        $answer->setDb($this->di->get("dbqb"));
+        $answer->findWhere("thread_id = ?", $realThread->id);
+        // var_dump($thread);
         $thread2 = new Thread\Thread();
         $thread2->setDb($this->di->get("dbqb"));
         $comments2 = $thread2->findAllWhereJoin("Thread.id = ?", $id, "Comment", "Comment.thread_id = Thread.id");
@@ -123,6 +128,7 @@ class ThreadController implements ContainerInjectableInterface
             "user" => $user,
             "tags" => $tags,
             "my_html" => $my_html,
+            "answer" => $answer,
         ];
         $page->add("hab/thread/single-thread", $data);
 

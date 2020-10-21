@@ -18,7 +18,7 @@ CREATE TABLE User (
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "quote" TEXT,
-    "gravitar" TEXT,
+    "gravatar" TEXT,
     "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "deleted_at" TIMESTAMP DEFAULT NULL
 
@@ -105,4 +105,11 @@ CREATE TABLE Answer (
     FOREIGN KEY(comment_id) REFERENCES Comment(id)
 );
 
+-- CREATE POINT_2_COMMENT TABLE
+CREATE TABLE Point_2_User (
+    "id" INTEGER PRIMARY KEY NOT NULL,
+    "amount" INTEGER,
+    user_id INTEGER,
 
+    FOREIGN KEY(user_id) REFERENCES User(id)
+);

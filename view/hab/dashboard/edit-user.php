@@ -2,18 +2,18 @@
 
 namespace Anax\View;
 
+// var_dump($user);
+
 ?>
 
 <h1>Edit user data</h1>
 
-<form action="user/edit" method="post">
+<form action="<?= $this->di->url->create("user/edit/") ?>" method="post">
     <label for="password">Password</label>
-    <input type="password" name="password">
+    <input type="password" name="password"><br>
     <label for="quote">Quote</label>
-    <input type="text" name="quote" value=<?= $user->quote ?>>
-    <label for="gravitar">Gravitar</label>
-    <input type="text" name="gravitar" value="<?= $user->gravitar ?>">
+    <input value="<?= $user->quote ?>" type="text" name="quote" value=<?= $user->quote ?>><br>
+    <label for="gravatar">Gravatar</label>
+    <input value="<?= $user->gravatar ?>" type="text" name="gravatar" value="<?= $user->gravatar ?>"><br>
     <button type="submit">Submit changes</button>
 </form>
-
-<?= $user->quote ?>

@@ -27,7 +27,7 @@ class User extends ActiveRecordModel
     public $created_at;
     public $deleted_at;
     public $quote;
-    public $gravitar;
+    public $gravatar;
 
     /**
      * Set the password.

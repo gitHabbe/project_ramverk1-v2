@@ -7,6 +7,7 @@ use Anax\Commons\ContainerInjectableTrait;
 use Hab\User;
 use Hab\Comment;
 use Hab\Point_2_Comment;
+use Hab\Point_2_User;
 use \Michelf\Markdown;
 
 class CommentController implements ContainerInjectableInterface
@@ -17,7 +18,6 @@ class CommentController implements ContainerInjectableInterface
     {
         $request = $this->di->get("request");
         $session = $this->di->get("session");
-        $user = $session->get("user");
         $user = $session->get("user", null);
         if ($user === null) {
             return "AUTH";
@@ -30,6 +30,11 @@ class CommentController implements ContainerInjectableInterface
         $comment->name = $commentName;
         $comment->points = 0;
         $comment->save();
+        $p2u = new Point_2_User\Point_2_User();
+        $p2u->setDb($this->di->get("dbqb"));
+        $p2u->amount = 3;
+        $p2u->user_id = $user["id"];
+        $p2u->save();
         $response = $this->di->get("response");
 
         return $response->redirect("thread/id/" . $id);
@@ -66,6 +71,11 @@ class CommentController implements ContainerInjectableInterface
         } else {
             $comment->points = intval($comment->points) + (2 * $vote);
         }
+        $p2u = new Point_2_User\Point_2_User();
+        $p2u->setDb($this->di->get("dbqb"));
+        $p2u->amount = $vote * 2;
+        $p2u->user_id = $comment->user_id;
+        $p2u->save();
         $p2c->positive = $vote;
         $comment->save();
         $p2c->save();

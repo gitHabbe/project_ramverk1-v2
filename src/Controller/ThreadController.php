@@ -7,8 +7,10 @@ use Anax\Commons\ContainerInjectableTrait;
 use Hab\Thread;
 use Hab\Comment;
 use Hab\Point_2_Thread;
+use Hab\User;
 use Hab\Tag;
 use Hab\Tag_2_Thread;
+use Hab\Point_2_User;
 use \Michelf\Markdown;
 
 class ThreadController implements ContainerInjectableInterface
@@ -65,6 +67,11 @@ class ThreadController implements ContainerInjectableInterface
         $thread->points = 0;
         $thread->created_at = date('Y-m-d H:i:s');
         $thread->save();
+        $p2u = new Point_2_User\Point_2_User();
+        $p2u->setDb($this->di->get("dbqb"));
+        $p2u->amount = 5;
+        $p2u->user_id = $user["id"];
+        $p2u->save();
         $tags = $request->getPost("tags");
         $tags = explode("#", $tags);
         $tags = array_filter($tags);
@@ -87,7 +94,7 @@ class ThreadController implements ContainerInjectableInterface
     {
         $session = $this->di->get("session");
         $page = $this->di->get("page");
-        $user = $session->get("user", null);
+        $sessionUser = $session->get("user", null);
         $realThread = new Thread\Thread();
         $realThread->setDb($this->di->get("dbqb"));
         $thread = new Thread\Thread();
@@ -97,6 +104,9 @@ class ThreadController implements ContainerInjectableInterface
         $comments2 = $thread2->findAllWhereJoin("Thread.id = ?", $id, "Comment", "Comment.thread_id = Thread.id");
         $thread = $thread->findAllWhereJoin("Thread.id = ?", $id, "User", "User.id = Thread.user_id");
         $thread = $thread[0];
+        $user = new User\User();
+        $user->setDb($this->di->get("dbqb"));
+        $user->findById($thread->user_id);
         $realThread = $realThread->findById($id);
         $comment = new Comment\Comment();
         $comment->setDb($this->di->get("dbqb"));
@@ -104,8 +114,6 @@ class ThreadController implements ContainerInjectableInterface
         $tags = new Tag_2_Thread\Tag_2_Thread();
         $tags->setDb($this->di->get("dbqb"));
         $tags = $tags->findAllWhereJoin("thread_id = ?", $id, "Tag", "Tag.id = tag_id");
-        // var_dump($tags);
-        // die();
         $my_html = Markdown::defaultTransform($realThread->content);
         $data = [
             "thread" => $thread,
@@ -140,6 +148,7 @@ class ThreadController implements ContainerInjectableInterface
         $thread = new Thread\Thread();
         $thread->setDb($this->di->get("dbqb"));
         $thread = $thread->findById($id);
+
         if ($p2t->id == null) {
             $p2t = new Point_2_Thread\Point_2_Thread();
             $p2t->setDb($this->di->get("dbqb"));
@@ -149,12 +158,14 @@ class ThreadController implements ContainerInjectableInterface
         } else {
             $thread->points = intval($thread->points) + (2 * $vote);
         }
-        // var_dump($thread);
-        // var_dump($id);
-        // die();
         $p2t->positive = $vote;
         $thread->save();
         $p2t->save();
+        $p2u = new Point_2_User\Point_2_User();
+        $p2u->setDb($this->di->get("dbqb"));
+        $p2u->amount = $vote * 2;
+        $p2u->user_id = $thread->user_id;
+        $p2u->save();
         $response = $this->di->get("response");
 
         return $response->redirect("thread/id/" . $id);

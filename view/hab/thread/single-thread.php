@@ -2,15 +2,17 @@
 
 namespace Anax\View;
 
-
-// var_dump($realThread->id);
-// var_dump($my_html);
-// die();
+function getGravatar($user) {
+    if ($user->gravatar === null || $user->gravatar === "") {
+        return "https://www.gravatar.com/avatar/00000000000000000000000000000000";
+    }
+    return $user->gravatar;
+}
 ?>
 
 <div class="thread">
     <div class="profile">
-        <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" alt="User Picture" class="picture">
+        <img src="<?= getGravatar($user) ?>" alt="User Picture" class="picture">
         <div class="user"><?= $thread->username ?></div>
         <div class="thread-points">
             <form action="<?= $this->di->url->create("thread/point/" . $realThread->id) ?>" method="post">
@@ -32,7 +34,7 @@ namespace Anax\View;
         <div class="content"><?= $my_html ?></div>
     </div>
 </div>
-<?php if($user["id"]) : ?>
+<?php if($user->id) : ?>
     <form action="<?= $this->di->url->create("comment/new/" . $realThread->id) ?>" method="post">
         <textarea value="" name="comment" cols="30" rows="10">
         </textarea>
@@ -43,7 +45,7 @@ namespace Anax\View;
 <?php foreach ($comments2 as $comment) : ?>
     <div class="comment">
         <div class="profile">
-            <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" alt="User Picture" class="picture">
+            <img src="<?= getGravatar($comments[$i]) ?>" alt="User Picture" class="picture">
             <div class="user"><?= $comments[$i]->username ?></div>
             <div class="comment-points">
             <!-- <div class=""><?= $comment->id ?></div> -->

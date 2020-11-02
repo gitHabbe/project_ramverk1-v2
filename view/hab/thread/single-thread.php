@@ -8,6 +8,8 @@ function getGravatar($user) {
     }
     return $user->gravatar;
 }
+
+
 ?>
 
 <div class="thread">
@@ -44,15 +46,20 @@ function getGravatar($user) {
 <?php $i = 0; ?>
 <?php foreach ($comments2 as $comment) : ?>
     <div class="comment">
+        <?php if ($answer->comment_id == $comment->id) : ?>
+            <div>ANSWER</div>
+        <?php endif; ?>
         <div class="profile">
             <img src="<?= getGravatar($comments[$i]) ?>" alt="User Picture" class="picture">
             <div class="user"><?= $comments[$i]->username ?></div>
                 <form action="<?= $this->di->url->create("comment/answer/") ?>" method="post">
                     <input style="display:none;" value="<?= $realThread->id ?>" type="text" name="threadid">
                     <input style="display:none;" value="<?= $comment->id ?>" type="text" name="commentid">
-                    <button type="submit" name="comment-vote" value="up">
-                        <i class="fas fa-check-square"></i>
-                    </button>
+                    <?php if ($answer->id === null) : ?>
+                        <button type="submit" name="comment-vote" value="up">
+                            <i class="fas fa-check-square"></i>
+                        </button>
+                    <?php endif; ?>
                 </form>
             <div class="comment-points">
                 <form action="<?= $this->di->url->create("comment/point/" . $comment->id) ?>" method="post">
@@ -67,6 +74,9 @@ function getGravatar($user) {
                 </form>
             </div>
         </div>
+        <a href="#<?= $i ?>">
+            <div id="<?= $i ?>">#<?= $i ?></div>
+        </a>
         <div class="content"><?= $comment->name ?></div>
     </div>
     <?php $i += 1; ?>

@@ -8,6 +8,7 @@ use Hab\User;
 use Hab\Comment;
 use Hab\Point_2_Comment;
 use Hab\Point_2_User;
+use Hab\Answer;
 use \Michelf\Markdown;
 
 class CommentController implements ContainerInjectableInterface
@@ -87,10 +88,25 @@ class CommentController implements ContainerInjectableInterface
     public function answerActionPost()
     {
         $request = $this->di->get("request");
-        $thread = $request->getPost("commentid");
-        $comment = $request->getPost("threadid");
-        var_dump($comment);
-        var_dump($thread);
-        die();
+        $comment = $request->getPost("commentid");
+        $thread = $request->getPost("threadid");
+        $answer = new Answer\Answer();
+        $answer->setDb($this->di->get("dbqb"));
+        $answer = $answer->find("thread_id", $thread);
+        // var_dump($thread);
+        // var_dump($comment);
+        // die();
+        if ($answer->id === null) {
+            $newAnswer = new Answer\Answer();
+            $newAnswer->setDb($this->di->get("dbqb"));
+            $newAnswer->thread_id = $thread;
+            $newAnswer->comment_id = $comment;
+            $newAnswer->save();
+        } else {
+            return "already answered";
+        }
+        $response = $this->di->get("response");
+
+        return $response->redirect("thread/id/" . $thread);
     }
 }

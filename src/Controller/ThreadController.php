@@ -100,9 +100,6 @@ class ThreadController implements ContainerInjectableInterface
         $realThread->setDb($this->di->get("dbqb"));
         $thread = new Thread\Thread();
         $thread->setDb($this->di->get("dbqb"));
-        $answer = new Answer\Answer();
-        $answer->setDb($this->di->get("dbqb"));
-        $answer->findWhere("thread_id = ?", $realThread->id);
         // var_dump($thread);
         $thread2 = new Thread\Thread();
         $thread2->setDb($this->di->get("dbqb"));
@@ -116,6 +113,9 @@ class ThreadController implements ContainerInjectableInterface
         $comment = new Comment\Comment();
         $comment->setDb($this->di->get("dbqb"));
         $comments = $comment->findAllWhereJoin("thread_id = ?", $id, "User", "User.id=user_id");
+        $answer = new Answer\Answer();
+        $answer->setDb($this->di->get("dbqb"));
+        $answer = $answer->find("thread_id", $realThread->id);
         $tags = new Tag_2_Thread\Tag_2_Thread();
         $tags->setDb($this->di->get("dbqb"));
         $tags = $tags->findAllWhereJoin("thread_id = ?", $id, "Tag", "Tag.id = tag_id");

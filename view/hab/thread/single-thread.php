@@ -9,6 +9,9 @@ function getGravatar($user) {
     return $user->gravatar;
 }
 
+$reply = "";
+
+var_dump($this->di->request->getPost("asdf"));
 
 ?>
 
@@ -38,6 +41,8 @@ function getGravatar($user) {
 </div>
 <?php if($user->id) : ?>
     <form action="<?= $this->di->url->create("comment/new/" . $realThread->id) ?>" method="post">
+        <input style="display:none;" value="<?= count($comments) ?>" type="text" name="commentsLen">
+        <input type="text" placeholder="Ex: #4" name="replyTo">
         <textarea value="" name="comment" cols="30" rows="10">
         </textarea>
         <button type="submit">Post comment</button>
@@ -74,9 +79,14 @@ function getGravatar($user) {
                 </form>
             </div>
         </div>
-        <a href="#<?= $i ?>">
-            <div id="<?= $i ?>">#<?= $i ?></div>
-        </a>
+        <div>
+            <a href="#<?= $i + 1 ?>">
+                <span id="<?= $i + 1 ?>">#<?= $i + 1 ?></span>
+            </a>
+            <?php if ($comment->reply_num) : ?>
+                <span>This is a reply to comment -><a href="#<?= $comment->reply_num ?>">#<?= $comment->reply_num ?></a></span>
+            <?php endif; ?>
+        </div>
         <div class="content"><?= $comment->name ?></div>
     </div>
     <?php $i += 1; ?>

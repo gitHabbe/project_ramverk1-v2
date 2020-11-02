@@ -26,6 +26,7 @@ class Comment extends ActiveRecordModel
     public $user_id;
     public $name;
     public $points;
+    public $reply_num;
     public $created_at;
     public $deleted_at;
     

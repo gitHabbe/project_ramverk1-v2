@@ -24,8 +24,14 @@ class CommentController implements ContainerInjectableInterface
             return "AUTH";
         }
         $commentName = $request->getPost("comment");
+        $replyTo = intval($request->getPost("replyTo"));
+        $commentsLen = intval($request->getPost("commentsLen"));
+        $isReplyRange = $replyTo >= 1 && $replyTo <= $commentsLen;
         $comment = new Comment\Comment();
         $comment->setDb($this->di->get("dbqb"));
+        if ($isReplyRange) {
+            $comment->reply_num = $replyTo;
+        }
         $comment->thread_id = $id;
         $comment->user_id = $user["id"];
         $comment->name = $commentName;

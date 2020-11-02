@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS Tag_2_Thread;
 DROP TABLE IF EXISTS Point_2_Thread;
 DROP TABLE IF EXISTS Point_2_Comment;
 DROP TABLE IF EXISTS Answer;
+DROP TABLE IF EXISTS Point_2_User;
 
 
 
@@ -55,6 +56,7 @@ CREATE TABLE Comment (
     user_id INTEGER,
     "name" TEXT NOT NULL,
     "points" INTEGER DEFAULT 0,
+    "reply_num" INTEGER DEFAULT 0,
     "created_at" TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     "deleted_at" TIMESTAMP DEFAULT NULL,
 

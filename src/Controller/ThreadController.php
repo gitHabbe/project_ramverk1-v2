@@ -204,6 +204,11 @@ class ThreadController implements ContainerInjectableInterface
     {
         $session = $this->di->get("session");
         $page = $this->di->get("page");
+        $theTag = new Tag\Tag();
+        $theTag->setDb($this->di->get("dbqb"));
+        $theTag = $theTag->findById($id);
+        // var_dump($tag);
+        // die();
         $tags = new Tag_2_Thread\Tag_2_Thread();
         $tags->setDb($this->di->get("dbqb"));
         $tags = $tags->findAllWhere("tag_id = ?", $id);
@@ -214,11 +219,12 @@ class ThreadController implements ContainerInjectableInterface
             array_push($threads, $thread->findById($tag->thread_id));
         }
         $data = [
+            "tag" => $theTag,
             "tags" => $tags,
             "threads" => $threads,
         ];
         $page->add("hab/thread/threads-with-tags", $data);
 
-        return $page->render(["title" => "All tags"]);
+        return $page->render(["title" => "Threads with tag"]);
     }
 }

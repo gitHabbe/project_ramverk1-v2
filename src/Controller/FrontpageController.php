@@ -32,6 +32,16 @@ class FrontpageController implements ContainerInjectableInterface
         $tags = array_map(function($a) { return $a->tag_id; }, $tags);
         $tagsCount = array_count_values($tags);
 
-        return $page->render(["title" => "Frontpage"]);
+        return $page->render(["title" => "Framsida"]);
+    }
+
+    public function omActionGet()
+    {
+        $response = $this->di->get("response");
+        $session = $this->di->get("session");
+        $page = $this->di->get("page");
+        $page->add("hab/general/om");
+
+        return $page->render(["title" => "Om"]);
     }
 }

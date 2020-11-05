@@ -7000,3 +7000,19 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 .isAnswer {
   border: green 1px solid;
 }
+.tag-list {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+}
+.tag-list a {
+  text-decoration: none;
+  color: #4893da;
+}
+.thread-tag-list {
+  list-style-type: none;
+}
+.thread-tag-list a {
+  text-decoration: none;
+  color: #4893da;
+}

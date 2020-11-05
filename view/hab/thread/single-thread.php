@@ -9,9 +9,9 @@ function getGravatar($user) {
     return $user->gravatar;
 }
 
-$reply = "";
+// var_dump($answer);
 
-var_dump($this->di->request->getPost("asdf"));
+$isAnswer = $answer->id != null ? "isAnswer" : "";
 
 ?>
 
@@ -50,7 +50,7 @@ var_dump($this->di->request->getPost("asdf"));
 <?php endif; ?>
 <?php $i = 0; ?>
 <?php foreach ($comments2 as $comment) : ?>
-    <div class="comment">
+    <div class="comment <?= $isAnswer ?>">
         <?php if ($answer->comment_id == $comment->id) : ?>
             <div>ANSWER</div>
         <?php endif; ?>

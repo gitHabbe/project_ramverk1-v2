@@ -9,6 +9,7 @@ use Hab\Comment;
 use Hab\Point_2_Comment;
 use Hab\Point_2_User;
 use Hab\Answer;
+use Hab\Thread;
 use \Michelf\Markdown;
 
 class CommentController implements ContainerInjectableInterface
@@ -24,7 +25,7 @@ class CommentController implements ContainerInjectableInterface
             return "AUTH";
         }
         $commentName = $request->getPost("comment");
-        $replyTo = intval($request->getPost("replyTo"));
+        $replyTo = intval(str_replace("#", "", $request->getPost("replyTo")));
         $commentsLen = intval($request->getPost("commentsLen"));
         $isReplyRange = $replyTo >= 1 && $replyTo <= $commentsLen;
         $comment = new Comment\Comment();
@@ -45,7 +46,6 @@ class CommentController implements ContainerInjectableInterface
         $response = $this->di->get("response");
 
         return $response->redirect("thread/id/" . $id);
-
     }
 
     public function pointActionPost(int $id)
@@ -58,7 +58,6 @@ class CommentController implements ContainerInjectableInterface
         }
         $vote = $request->getPost("comment-vote");
         $thread_id = $request->getPost("threadid");
-        var_dump($id);
         $vote = $vote === "up" ? 1 : -1;
         $p2c = new Point_2_Comment\Point_2_Comment();
         $p2c->setDb($this->di->get("dbqb"));
@@ -94,22 +93,32 @@ class CommentController implements ContainerInjectableInterface
     public function answerActionPost()
     {
         $request = $this->di->get("request");
+        $session = $this->di->get("session");
+        $sessionUser = $session->get("user");
         $comment = $request->getPost("commentid");
         $thread = $request->getPost("threadid");
         $answer = new Answer\Answer();
         $answer->setDb($this->di->get("dbqb"));
         $answer = $answer->find("thread_id", $thread);
-        // var_dump($thread);
-        // var_dump($comment);
-        // die();
-        if ($answer->id === null) {
+        $threadObj = new Thread\Thread();
+        $threadObj->setDb($this->di->get("dbqb"));
+        $threadObj = $threadObj->findById($thread);
+        $commentObj = new Comment\Comment();
+        $commentObj->setDb($this->di->get("dbqb"));
+        $commentObj = $commentObj->findById($comment);
+        $p2u = new Point_2_User\Point_2_User();
+        $p2u->setDb($this->di->get("dbqb"));
+        $p2u->user_id = $commentObj->user_id;
+        $p2u->amount = 10;
+        $p2u->save();
+        if ($answer->id === null && $threadObj->user_id == $sessionUser["id"]) {
             $newAnswer = new Answer\Answer();
             $newAnswer->setDb($this->di->get("dbqb"));
             $newAnswer->thread_id = $thread;
             $newAnswer->comment_id = $comment;
             $newAnswer->save();
         } else {
-            return "already answered";
+            return "Can't do that";
         }
         $response = $this->di->get("response");
 

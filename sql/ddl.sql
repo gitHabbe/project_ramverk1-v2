@@ -68,8 +68,8 @@ CREATE TABLE Comment (
 -- CREATE TAG_2_THREAD TABLE
 CREATE TABLE Tag_2_Thread (
     "id" INTEGER PRIMARY KEY NOT NULL,
-    thread_id INTEGER,
-    tag_id INTEGER,
+    "thread_id" INTEGER,
+    "tag_id" INTEGER,
 
     FOREIGN KEY(thread_id) REFERENCES Thread(id),
     FOREIGN KEY(tag_id) REFERENCES Tag(id)

@@ -20,6 +20,11 @@ return [
             "title" => "Trådar",
         ],
         [
+            "text" => "Taggar",
+            "url" => "thread/tags",
+            "title" => "Taggar",
+        ],
+        [
             "text" => "Om",
             "url" => "om",
             "title" => "Om oss",

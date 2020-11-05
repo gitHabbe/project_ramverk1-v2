@@ -6997,3 +6997,6 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 .comment-points .vote-down {
   color: red;
 }
+.isAnswer {
+  border: green 1px solid;
+}

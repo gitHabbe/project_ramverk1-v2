@@ -41,6 +41,11 @@ class ThreadController implements ContainerInjectableInterface
         $page = $this->di->get("page");
         $request = $this->di->get("request");
         $response = $this->di->get("response");
+        $session = $this->di->get("session");
+        $user = $session->get("user", null);
+        if ($user === null) {
+            return $response->redirect("user/login");
+        }
         $tag = new Tag\Tag();
         $tag->setDb($this->di->get("dbqb"));
         $tags = $tag->findAll();
@@ -55,6 +60,10 @@ class ThreadController implements ContainerInjectableInterface
     public function newActionPost()
     {
         $session = $this->di->get("session");
+        $user = $session->get("user", null);
+        if ($user === null) {
+            return "AUTH";
+        }
         $user = $session->get("user");
         $response = $this->di->get("response");
         $request = $this->di->get("request");
@@ -98,18 +107,17 @@ class ThreadController implements ContainerInjectableInterface
         $sessionUser = $session->get("user", null);
         $realThread = new Thread\Thread();
         $realThread->setDb($this->di->get("dbqb"));
-        $thread = new Thread\Thread();
-        $thread->setDb($this->di->get("dbqb"));
-        // var_dump($thread);
+        $realThread = $realThread->findById($id);
         $thread2 = new Thread\Thread();
         $thread2->setDb($this->di->get("dbqb"));
         $comments2 = $thread2->findAllWhereJoin("Thread.id = ?", $id, "Comment", "Comment.thread_id = Thread.id");
+        $thread = new Thread\Thread();
+        $thread->setDb($this->di->get("dbqb"));
         $thread = $thread->findAllWhereJoin("Thread.id = ?", $id, "User", "User.id = Thread.user_id");
         $thread = $thread[0];
         $user = new User\User();
         $user->setDb($this->di->get("dbqb"));
         $user->findById($thread->user_id);
-        $realThread = $realThread->findById($id);
         $comment = new Comment\Comment();
         $comment->setDb($this->di->get("dbqb"));
         $comments = $comment->findAllWhereJoin("thread_id = ?", $id, "User", "User.id=user_id");
@@ -175,5 +183,42 @@ class ThreadController implements ContainerInjectableInterface
         $response = $this->di->get("response");
 
         return $response->redirect("thread/id/" . $id);
+    }
+
+    public function tagsActionGet()
+    {
+        $session = $this->di->get("session");
+        $page = $this->di->get("page");
+        $tags = new Tag\Tag();
+        $tags->setDb($this->di->get("dbqb"));
+        $tags = $tags->findAll();
+        $data = [
+            "tags" => $tags,
+        ];
+        $page->add("hab/thread/tags", $data);
+
+        return $page->render(["title" => "All tags"]);
+    }
+
+    public function tagidActionGet(int $id)
+    {
+        $session = $this->di->get("session");
+        $page = $this->di->get("page");
+        $tags = new Tag_2_Thread\Tag_2_Thread();
+        $tags->setDb($this->di->get("dbqb"));
+        $tags = $tags->findAllWhere("tag_id = ?", $id);
+        $threads = [];
+        foreach ($tags as $tag) {
+            $thread = new Thread\Thread();
+            $thread->setDb($this->di->get("dbqb"));
+            array_push($threads, $thread->findById($tag->thread_id));
+        }
+        $data = [
+            "tags" => $tags,
+            "threads" => $threads,
+        ];
+        $page->add("hab/thread/threads-with-tags", $data);
+
+        return $page->render(["title" => "All tags"]);
     }
 }

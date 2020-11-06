@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/gitHabbe/project_ramverk1-v2.svg?style=shield)](https://circleci.com/gh/gitHabbe/project_ramverk1-v2)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/gitHabbe/project_ramverk1-v2/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/gitHabbe/project_ramverk1-v2/?branch=main)
 
 Table of Content
 ------------------

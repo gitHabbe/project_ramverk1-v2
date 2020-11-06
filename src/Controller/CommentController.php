@@ -35,7 +35,9 @@ class CommentController implements ContainerInjectableInterface
         }
         $comment->thread_id = $id;
         $comment->user_id = $user["id"];
-        $comment->name = $commentName;
+        $my_html = Markdown::defaultTransform($commentName);
+        $comment->name = $my_html;
+        // $comment->name = $commentName;
         $comment->points = 0;
         $comment->save();
         $p2u = new Point_2_User\Point_2_User();

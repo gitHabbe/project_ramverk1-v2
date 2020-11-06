@@ -55,8 +55,10 @@ $isAnswer = $answer->id != null ? "isAnswer" : "";
             <div>ANSWER</div>
         <?php endif; ?>
         <div class="profile">
-            <img src="<?= getGravatar($comments[$i]) ?>" alt="User Picture" class="picture">
-            <div class="user"><?= $comments[$i]->username ?></div>
+            <a href="<?= $this->di->url->create("user/id/" . $comments[$i]->user_id) ?>">
+                <img src="<?= getGravatar($comments[$i]) ?>" alt="User Picture" class="picture">
+                <div class="user"><?= $comments[$i]->username ?></div>
+            </a>
                 <form action="<?= $this->di->url->create("comment/answer/") ?>" method="post">
                     <input style="display:none;" value="<?= $realThread->id ?>" type="text" name="threadid">
                     <input style="display:none;" value="<?= $comment->id ?>" type="text" name="commentid">

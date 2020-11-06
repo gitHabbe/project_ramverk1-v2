@@ -5,6 +5,8 @@ namespace Hab\Controller;
 use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 use Hab\User;
+use Hab\Thread;
+use Hab\Answer;
 use Hab\Point_2_User;
 
 class UserController implements ContainerInjectableInterface
@@ -78,10 +80,10 @@ class UserController implements ContainerInjectableInterface
         $user->setDb($this->di->get("dbqb"));
         $user->username = $username;
         if ($user->isTaken()) {
-            return "taken";
+            return $response->redirect("user/signup");
         }
         if ($password1 != $password2) {
-            return "password doesnt match";
+            return $response->redirect("user/signup");
         }
         $user->setPassword($password1);
         $user->save();
@@ -100,6 +102,7 @@ class UserController implements ContainerInjectableInterface
 
     public function editActionGet()
     {
+        $response = $this->di->get("response");
         $session = $this->di->get("session");
         $userSession = $session->get("user");
         if (!$userSession["id"]) {
@@ -133,9 +136,6 @@ class UserController implements ContainerInjectableInterface
         if (strpos($gravatar, $gravPattern) != 0) {
             return false;
         }
-        // var_dump($quote);
-        // var_dump($user->quote);
-        // die();
         if ($password > 1) {
             $user->setPassword($password);
         }
@@ -152,5 +152,33 @@ class UserController implements ContainerInjectableInterface
         $user->save();
 
         return $response->redirect("user");
+    }
+
+    public function idActionGet(int $id)
+    {
+        $session = $this->di->get("session");
+        // $userSession = $session->get("user");
+        $response = $this->di->get("response");
+        $request = $this->di->get("request");
+        $page = $this->di->get("page");
+        $user = new User\User();
+        $user->setDb($this->di->get("dbqb"));
+        $user = $user->findById($id);
+        $threadsTemp = new Thread\Thread();
+        $threadsTemp->setDb($this->di->get("dbqb"));
+        $threadsTemp = $threadsTemp->findAllWhere("user_id = ?", $id);
+        $threads = [];
+        foreach($threadsTemp ?? [] as $thread) {
+            $answer = new Answer\Answer();
+            $answer->setDb($this->di->get("dbqb"));
+            array_push($threads, [$thread, $answer->findWhere("thread_id = ?", $thread->id)]);
+        }
+        $data = [
+            "user" => $user,
+            "threads" => $threads,
+        ];
+        $page->add("hab/dashboard/user", $data);
+
+        return $page->render(["title" => "Edit user"]);
     }
 }

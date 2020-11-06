@@ -7009,10 +7009,12 @@ a.rm-button.rm-clicked .rm-button-face-2 {
   text-decoration: none;
   color: #4893da;
 }
-.thread-tag-list {
+.thread-tag-list,
+.user-threads {
   list-style-type: none;
 }
-.thread-tag-list a {
+.thread-tag-list a,
+.user-threads a {
   text-decoration: none;
   color: #4893da;
 }

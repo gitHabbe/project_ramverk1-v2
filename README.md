@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/gitHabbe/project_ramverk1-v2.svg?style=shield)](https://circleci.com/gh/gitHabbe/project_ramverk1-v2)
+
 Table of Content
 ------------------
 

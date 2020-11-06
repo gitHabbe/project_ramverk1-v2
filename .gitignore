@@ -3,4 +3,4 @@
 /vendor
 memory::
 composer.lock
-config.php
+./config.php

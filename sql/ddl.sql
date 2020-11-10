@@ -97,6 +97,15 @@ CREATE TABLE Point_2_Comment (
     FOREIGN KEY(user_id) REFERENCES User(id)
 );
 
+-- CREATE POINT_2_COMMENT TABLE
+CREATE TABLE Point_2_User (
+    "id" INTEGER PRIMARY KEY NOT NULL,
+    "amount" INTEGER,
+    user_id INTEGER,
+
+    FOREIGN KEY(user_id) REFERENCES User(id)
+);
+
 -- CREATE ANSWER TABLE
 CREATE TABLE Answer (
     "id" INTEGER PRIMARY KEY NOT NULL,
@@ -105,13 +114,4 @@ CREATE TABLE Answer (
 
     FOREIGN KEY(thread_id) REFERENCES Thread(id),
     FOREIGN KEY(comment_id) REFERENCES Comment(id)
-);
-
--- CREATE POINT_2_COMMENT TABLE
-CREATE TABLE Point_2_User (
-    "id" INTEGER PRIMARY KEY NOT NULL,
-    "amount" INTEGER,
-    user_id INTEGER,
-
-    FOREIGN KEY(user_id) REFERENCES User(id)
 );

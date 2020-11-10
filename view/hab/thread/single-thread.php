@@ -9,9 +9,13 @@ function getGravatar($user) {
     return $user->gravatar;
 }
 
-// var_dump($answer);
+// $total = 0;
+$total = $thread->points;
+foreach ($comments ?? [] as $comment) {
+    $total += $comment->points;    
+}
 
-$isAnswer = $answer->id != null ? "isAnswer" : "";
+
 
 ?>
 
@@ -32,7 +36,7 @@ $isAnswer = $answer->id != null ? "isAnswer" : "";
         </div>
     </div>
     <div class="thread-content">
-        <div class="topic"><?= "TITLE: " . $thread->topic ?></div>
+        <div class="topic"><?= "TITLE: " . $thread->topic ?> (<?= $total ?>p)</div>
         <?php foreach ($tags as $tag) : ?>
             <span><a href="" class="thread-tag"><?= "#" . $tag->name ?></a></span>
         <?php endforeach; ?>
@@ -40,34 +44,47 @@ $isAnswer = $answer->id != null ? "isAnswer" : "";
     </div>
 </div>
 <?php if($user->id) : ?>
-    <form action="<?= $this->di->url->create("comment/new/" . $realThread->id) ?>" method="post">
-        <input style="display:none;" value="<?= count($comments) ?>" type="text" name="commentsLen">
-        <input type="text" placeholder="Ex: #4" name="replyTo">
-        <textarea value="" name="comment" cols="30" rows="10">
-        </textarea>
-        <button type="submit">Post comment</button>
-    </form>
+    <div class="post-form">
+        <form action="<?= $this->di->url->create("comment/new/" . $realThread->id) ?>" method="post">
+            <input style="display:none;" value="<?= count($comments) ?>" type="text" name="commentsLen">
+            <input type="text" placeholder="Ex: #4" name="replyTo">
+            <button type="submit">Post comment</button>
+            <textarea value="" name="comment" cols="30" rows="10">
+            </textarea>
+        </form>
+    </div>
 <?php endif; ?>
+
+<div>
+    <form action="<?= $this->di->url->create("thread/id/" . $realThread->id) ?>" method="get">
+        <select name="sort" id="comment-sort" onchange="this.form.submit()">
+            <option value=""></option>
+            <option value="date">Date</option>
+            <option value="points">Points</option>
+        </select>
+    </form>
+</div>
+
 <?php $i = 0; ?>
 <?php foreach ($comments2 as $comment) : ?>
-    <div class="comment <?= $isAnswer ?>">
-        <?php if ($answer->comment_id == $comment->id) : ?>
-            <div>ANSWER</div>
-        <?php endif; ?>
+    <?php $isAnswer = $answer->comment_id == $comment->id ? " isAnswer" : ""; ?>
+    <div class="comment<?= $isAnswer ?>">
         <div class="profile">
             <a href="<?= $this->di->url->create("user/id/" . $comments[$i]->user_id) ?>">
                 <img src="<?= getGravatar($comments[$i]) ?>" alt="User Picture" class="picture">
                 <div class="user"><?= $comments[$i]->username ?></div>
             </a>
-                <form action="<?= $this->di->url->create("comment/answer/") ?>" method="post">
-                    <input style="display:none;" value="<?= $realThread->id ?>" type="text" name="threadid">
-                    <input style="display:none;" value="<?= $comment->id ?>" type="text" name="commentid">
-                    <?php if ($answer->id === null) : ?>
+            <?php if ($answer->id === null) : ?>
+                <div class="comment-answerBtn">
+                    <form action="<?= $this->di->url->create("comment/answer/") ?>" method="post">
+                        <input style="display:none;" value="<?= $realThread->id ?>" type="text" name="threadid">
+                        <input style="display:none;" value="<?= $comment->id ?>" type="text" name="commentid">
                         <button type="submit" name="comment-vote" value="up">
-                            <i class="fas fa-check-square"></i>
+                            <i class="fas fa-check-square mark-answer"></i>
                         </button>
-                    <?php endif; ?>
-                </form>
+                    </form>
+                </div>
+            <?php endif; ?>
             <div class="comment-points">
                 <form action="<?= $this->di->url->create("comment/point/" . $comment->id) ?>" method="post">
                     <input style="display:none;" value="<?= $realThread->id ?>" type="text" name="threadid">
@@ -81,15 +98,20 @@ $isAnswer = $answer->id != null ? "isAnswer" : "";
                 </form>
             </div>
         </div>
-        <div>
-            <a href="#<?= $i + 1 ?>">
-                <span id="<?= $i + 1 ?>">#<?= $i + 1 ?></span>
-            </a>
-            <?php if ($comment->reply_num) : ?>
-                <span>This is a reply to comment -><a href="#<?= $comment->reply_num ?>">#<?= $comment->reply_num ?></a></span>
+        <div class="content">
+            <?php if ($answer->comment_id == $comment->id) : ?>
+                <span>ANSWER</span>
             <?php endif; ?>
+            <div>
+                <a href="#<?= $comment->num ?>">
+                    <span id="<?= $comment->num ?>">#<?= $comment->num ?></span>
+                </a>
+                <?php if ($comment->reply_num) : ?>
+                    <span>This is a reply to comment -><a href="#<?= $comment->reply_num ?>">#<?= $comment->reply_num ?></a></span>
+                <?php endif; ?>
+            </div>
+            <?= $comment->name ?>
         </div>
-        <div class="content"><?= $comment->name ?></div>
     </div>
     <?php $i += 1; ?>
 <?php endforeach; ?>

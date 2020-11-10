@@ -27,6 +27,19 @@ class ThreadController implements ContainerInjectableInterface
         $comment = new Comment\Comment();
         $comment->setDb($this->di->get("dbqb"));
         $comments = $comment->findAll();
+        foreach ($threads ?? [] as $thread) {
+            $answer = new Answer\Answer();
+            $answer->setDb($this->di->get("dbqb"));
+            $answer = $answer->find("thread_id", $thread->id);
+            $thread->answer = $answer;
+            $rank = $thread->points;
+            foreach ($comments ?? [] as $comment) {
+                if ($comment->thread_id === $thread->id) {
+                    $rank += $comment->points;
+                }
+            }
+            $thread->rank = $rank;
+        }
         $data = [
             "threads" => $threads,
             "comments" => $comments,
@@ -103,6 +116,8 @@ class ThreadController implements ContainerInjectableInterface
     public function idActionGet(int $id)
     {
         $session = $this->di->get("session");
+        $request = $this->di->get("request");
+        $sort = $request->getGet("sort");
         $page = $this->di->get("page");
         $sessionUser = $session->get("user", null);
         $realThread = new Thread\Thread();
@@ -118,9 +133,37 @@ class ThreadController implements ContainerInjectableInterface
         $user = new User\User();
         $user->setDb($this->di->get("dbqb"));
         $user->findById($thread->user_id);
+        // Problem with comment and thread id, so have to fetch twitce.
         $comment = new Comment\Comment();
         $comment->setDb($this->di->get("dbqb"));
         $comments = $comment->findAllWhereJoin("thread_id = ?", $id, "User", "User.id=user_id");
+        // In a real would app you dont need this "num".
+        // But for SQL template-inserts I do.
+        $num = 1;
+        foreach ($comments2 ?? [] as $comment) {
+            $comment->num = $num;
+            $num += 1;
+        }
+        $num = 1;
+        foreach ($comments ?? [] as $comment) {
+            $comment->num = $num;
+            $num += 1;
+        }
+        if ($sort === "date") {
+            usort($comments2, function ($a, $b) {
+                return strcmp($a->num, $b->num);
+            });
+            usort($comments, function ($a, $b) {
+                return strcmp($a->num, $b->num);
+            });
+        } else if ($sort === "points") {
+            usort($comments2, function ($a, $b) {
+                return strcmp($b->points, $a->points);
+            });
+            usort($comments, function ($a, $b) {
+                return strcmp($b->points, $a->points);
+            });
+        }
         $answer = new Answer\Answer();
         $answer->setDb($this->di->get("dbqb"));
         $answer = $answer->find("thread_id", $realThread->id);

@@ -3,6 +3,9 @@
 namespace Anax\View;
 
 ?>
+<?php if (isset($error)) : ?>
+    <p><?= $error ?></p>
+<?php endif; ?>
 <form action="signup" method="POST">
     <label for="username">Username</label>
     <input type="text" name="username">

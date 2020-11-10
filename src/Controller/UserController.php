@@ -6,8 +6,11 @@ use Anax\Commons\ContainerInjectableInterface;
 use Anax\Commons\ContainerInjectableTrait;
 use Hab\User;
 use Hab\Thread;
+use Hab\Comment;
 use Hab\Answer;
 use Hab\Point_2_User;
+use Hab\Point_2_Comment;
+use Hab\Point_2_Thread;
 
 class UserController implements ContainerInjectableInterface
 {
@@ -73,6 +76,7 @@ class UserController implements ContainerInjectableInterface
     {
         $request = $this->di->get("request");
         $response = $this->di->get("response");
+        $page = $this->di->get("page");
         $username = $request->getPost("username");
         $password1 = $request->getPost("password1");
         $password2 = $request->getPost("password2");
@@ -80,10 +84,12 @@ class UserController implements ContainerInjectableInterface
         $user->setDb($this->di->get("dbqb"));
         $user->username = $username;
         if ($user->isTaken()) {
-            return $response->redirect("user/signup");
+            $page->add("hab/signup/default", ["error" => "User name taken."]);
+            return $page->render(["title" => "User sign-up"]);
         }
         if ($password1 != $password2) {
-            return $response->redirect("user/signup");
+            $page->add("hab/signup/default", ["error" => "Passwords doesnt match eachother."]);
+            return $page->render(["title" => "User sign-up"]);
         }
         $user->setPassword($password1);
         $user->save();
@@ -104,6 +110,7 @@ class UserController implements ContainerInjectableInterface
     {
         $response = $this->di->get("response");
         $session = $this->di->get("session");
+        $page = $this->di->get("page");
         $userSession = $session->get("user");
         if (!$userSession["id"]) {
             return $response->redirect("user/login");
@@ -111,7 +118,6 @@ class UserController implements ContainerInjectableInterface
         $user = new User\User();
         $user->setDb($this->di->get("dbqb"));
         $user = $user->findById($userSession["id"]);
-        $page = $this->di->get("page");
         $page->add("hab/dashboard/edit-user", ["user" => $user]);
 
         return $page->render(["title" => "Edit user"]);
@@ -164,6 +170,12 @@ class UserController implements ContainerInjectableInterface
         $user = new User\User();
         $user->setDb($this->di->get("dbqb"));
         $user = $user->findById($id);
+        $p2u = new Point_2_user\Point_2_user();
+        $p2u->setDb($this->di->get("dbqb"));
+        $p2u = $p2u->findAllWhere("user_id = ?", $id);
+        $comments = new Comment\Comment();
+        $comments->setDb($this->di->get("dbqb"));
+        $comments = $comments->findAllWhere("user_id = ?", $id);
         $threadsTemp = new Thread\Thread();
         $threadsTemp->setDb($this->di->get("dbqb"));
         $threadsTemp = $threadsTemp->findAllWhere("user_id = ?", $id);
@@ -173,12 +185,22 @@ class UserController implements ContainerInjectableInterface
             $answer->setDb($this->di->get("dbqb"));
             array_push($threads, [$thread, $answer->findWhere("thread_id = ?", $thread->id)]);
         }
+        $p2t = new Point_2_Thread\Point_2_Thread();
+        $p2t->setDb($this->di->get("dbqb"));
+        $p2t = $p2t->findAllWhere("user_id = ?", $id);
+        $p2c = new Point_2_Comment\Point_2_Comment();
+        $p2c->setDb($this->di->get("dbqb"));
+        $p2c = $p2c->findAllWhere("user_id = ?", $id);
         $data = [
             "user" => $user,
             "threads" => $threads,
+            "comments" => $comments,
+            "p2u" => $p2u,
+            "p2c" => $p2c,
+            "p2t" => $p2t,
         ];
         $page->add("hab/dashboard/user", $data);
 
-        return $page->render(["title" => "Edit user"]);
+        return $page->render(["title" => $user->username]);
     }
 }

@@ -6940,33 +6940,36 @@ a.rm-button.rm-clicked .rm-button-face-2 {
  */
 .thread {
   display: flex;
-}
-.topic {
-  margin-top: 10px;
-  text-decoration: underline;
-  font-size: 20px;
-}
-.thread-tag {
-  color: #2783b9;
-  text-decoration: none;
-}
-.thread,
-.comment {
   margin: 10px 0;
   border: #111 1px solid;
   min-height: 300px;
 }
+.thread .topic {
+  margin-top: 10px;
+  text-decoration: underline;
+  font-size: 20px;
+}
+.thread .thread-tag {
+  color: #2783b9;
+  text-decoration: none;
+}
+.thread .thread-content {
+  width: 73%;
+}
+.comment {
+  display: flex;
+  margin: 10px 0;
+  border: #111 1px solid;
+  min-height: 300px;
+}
+.comment .content {
+  width: 73%;
+}
 .user {
   text-align: center;
 }
-.thread-content {
-  width: 73%;
-}
 .profile {
   width: 27%;
-}
-.profile {
-  float: left;
   border: #111 1px solid;
   margin: 10px;
   padding: 20px;
@@ -6997,6 +7000,16 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 .comment-points .vote-down {
   color: red;
 }
+.comment-answerBtn {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  font-size: 30px;
+  margin: 0 4px;
+}
+.comment-answerBtn .mark-answer {
+  color: #4797ff;
+}
 .isAnswer {
   border: green 1px solid;
 }
@@ -7017,4 +7030,8 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 .user-threads a {
   text-decoration: none;
   color: #4893da;
+}
+.post-form {
+  margin: 0 auto;
+  max-width: 500px;
 }

@@ -224,41 +224,44 @@ img.responsive {
 @navbarFontFamily: @fontFamilyTimesNewRoman;
 
 // THREAD
-
 .thread {
     display: flex;
-}
-
-.topic {
-    margin-top: 10px;
-    text-decoration: underline;
-    font-size: 20px;
-}
-
-.thread-tag {
-    color: rgb(39, 131, 185);
-    text-decoration: none;
-}
-.thread,
-.comment {
     margin: 10px 0;
     border: #111 1px solid;
     min-height: 300px;
+
+    .topic {
+        margin-top: 10px;
+        text-decoration: underline;
+        font-size: 20px;
+    }
+    .thread-tag {
+        color: rgb(39, 131, 185);
+        text-decoration: none;
+    }
+    .thread-content {
+        width: 73%;
+    }
+}
+
+// COMMENT
+.comment {
+    display: flex;
+    margin: 10px 0;
+    border: #111 1px solid;
+    min-height: 300px;
+
+    .content {
+        width: 73%;
+    }
 }
 
 .user {
     text-align: center;
 }
 
-.thread-content {
-    width: 73%;
-}
 .profile {
     width: 27%;
-}
-
-.profile {
-    float: left;
     border: #111 1px solid;
     margin: 10px;
     padding: 20px;
@@ -289,6 +292,18 @@ img.responsive {
     }
 }
 
+.comment-answerBtn {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    font-size: 30px;
+    margin: 0 4px;
+
+    .mark-answer {
+        color: rgb(71, 151, 255);
+    }
+}
+
 .isAnswer {
     border: green 1px solid;
 }
@@ -310,4 +325,9 @@ img.responsive {
         text-decoration: none;
         color: rgb(72, 147, 218);
     }
+}
+
+.post-form {
+    margin: 0 auto;
+    max-width: 500px;
 }

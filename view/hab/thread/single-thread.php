@@ -37,7 +37,7 @@ foreach ($comments ?? [] as $comment) {
     <div class="thread-content">
         <div class="topic"><?= "TITLE: " . $thread->topic ?> (<?= $total ?>p)</div>
         <?php foreach ($tags as $tag) : ?>
-            <span><a href="" class="thread-tag"><?= "#" . $tag->name ?></a></span>
+            <span><a href="<?= $this->di->url->create("thread/tagid/" . $tag->id) ?>" class="thread-tag"><?= "#" . $tag->name ?></a></span>
         <?php endforeach; ?>
         <div class="content"><?= $my_html ?></div>
     </div>

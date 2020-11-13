@@ -44,7 +44,7 @@ foreach ($p2u ?? [] as $point) {
 <?php foreach ($comments ?? [] as $comment) : ?>
     <li>
         <a href="<?= $this->di->url->create("thread/id/" . $comment->thread_id) ?>">
-            <?= filter_var($comment->name, FILTER_SANITIZE_STRING); ?>
+            <?= filter_var(strlen($comment->name) > 70 ? substr($comment->name, 0, 70) . "..." : $comment->name, FILTER_SANITIZE_STRING); ?>
         </a>
     </li>
 <?php endforeach; ?>

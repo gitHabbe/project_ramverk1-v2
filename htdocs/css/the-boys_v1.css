@@ -7117,6 +7117,14 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 .thread-item i {
   margin-right: 2px;
 }
+.site-logo img {
+  width: 100px;
+  border-radius: 20px;
+  z-index: -2;
+}
+.site-logo-text {
+  position: relative;
+}
 .blue {
   background-color: #54a8f6;
 }
@@ -7125,4 +7133,9 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 }
 .green {
   background: #07a301;
+}
+@media screen and (max-width: 800px) {
+  .site-logo {
+    display: none;
+  }
 }

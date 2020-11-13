@@ -23,7 +23,7 @@ INSERT INTO User ("username", "password", "quote") VALUES
 INSERT INTO Tag ("name") VALUES
     ("hero"),
     ("villain"),
-    ("wondering"),
+    ("theory"),
     ("theboys"),
     ("seven"),
     ("cast")
@@ -82,7 +82,11 @@ INSERT INTO Tag_2_Thread ("thread_id", "tag_id") VALUES
     (1, 4),
     (2, 5),
     (6, 2),
-    (6, 1)
+    (6, 1),
+    (14, 3),
+    (11, 3),
+    (18, 6),
+    (5, 6)
 ;
 
 SELECT * FROM User;

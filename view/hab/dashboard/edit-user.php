@@ -8,6 +8,10 @@ namespace Anax\View;
 
 <h1>Edit user data</h1>
 
+<?php if (isset($error)) : ?>
+    <p><?= $error ?></p>
+<?php endif; ?>
+
 <form action="<?= $this->di->url->create("user/edit/") ?>" method="post">
     <label for="password">Password</label>
     <input type="password" name="password"><br>

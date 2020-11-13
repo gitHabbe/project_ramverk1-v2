@@ -5382,6 +5382,41 @@ h4:hover .header-anchor {
 .toc-readmore ul {
   list-style: circle;
 }
+@font-face {
+  font-family: 'Gudea';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Gudea'), url(https://fonts.gstatic.com/s/gudea/v10/neIFzCqgsI0mp-CP.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Gudea';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Gudea Bold'), local('Gudea-Bold'), url(https://fonts.gstatic.com/s/gudea/v10/neIIzCqgsI0mp9gz26WG.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Jura';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jura/v15/z7NOdRfiaC4Vd8hhoPzfb5vBTP1d7auh.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Jura';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jura/v15/z7NOdRfiaC4Vd8hhoPzfb5vBTP2D6quh.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Jura';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/jura/v15/z7NOdRfiaC4Vd8hhoPzfb5vBTP266quh.ttf) format('truetype');
+}
 .breadcrumb-list,
 .bullet-list {
   margin-bottom: 24px;
@@ -5605,7 +5640,7 @@ body {
   padding: 0;
   color: #111;
   background-color: #fff;
-  font: 16px/1.5 Verdana, Geneva, sans-serif;
+  font: 16px/1.5 "Gudea", sans-serif;
 }
 h1,
 h2,
@@ -5613,7 +5648,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: Cambria, Georgia, Times, 'Times New Roman', serif;
+  font-family: "Jura", sans-serif;
   margin-top: 24px;
   margin-bottom: 24px;
 }
@@ -6921,7 +6956,7 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 }
 .rm-navbar {
   text-align: center;
-  font-family: Cambria, Georgia, Times, 'Times New Roman', serif;
+  font-family: "Jura", sans-serif;
   font-size: 1.5em;
   line-height: 0;
 }
@@ -7031,7 +7066,63 @@ a.rm-button.rm-clicked .rm-button-face-2 {
   text-decoration: none;
   color: #4893da;
 }
-.post-form {
+.post-form,
+.login-form {
+  max-width: 400px;
   margin: 0 auto;
-  max-width: 500px;
+}
+.post-form label,
+.login-form label,
+.post-form input,
+.login-form input,
+.post-form textarea,
+.login-form textarea {
+  display: block;
+  width: 100%;
+  font-size: 1em;
+  line-height: 2em;
+  font-family: "Jura", sans-serif;
+}
+.post-form input,
+.login-form input,
+.post-form textarea,
+.login-form textarea {
+  border: none;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  background: #f8f4e5;
+  padding-left: 5px;
+  outline: none;
+}
+.button {
+  display: block;
+  margin: 0 auto;
+  line-height: 2em;
+  padding: 0 20px;
+  margin-top: 10px;
+  border: none;
+  color: white;
+  letter-spacing: 2px;
+  transition: 0.2s all ease-in-out;
+  border-bottom: 2px solid;
+}
+.topic {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 130px;
+}
+.thread-item span {
+  margin-right: 6px;
+}
+.thread-item i {
+  margin-right: 2px;
+}
+.blue {
+  background-color: #54a8f6;
+}
+.orange {
+  background: #ff9100;
+}
+.green {
+  background: #07a301;
 }

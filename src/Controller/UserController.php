@@ -52,12 +52,21 @@ class UserController implements ContainerInjectableInterface
         $session = $this->di->get("session");
         $request = $this->di->get("request");
         $response = $this->di->get("response");
+        $page = $this->di->get("page");
         $username = $request->getPost("username");
         $password = $request->getPost("password");
+        $isUserTaken = new User\User();
+        $isUserTaken->setDb($this->di->get("dbqb"));
+        $isUserTaken = $isUserTaken->findWhere("username = ?", $username);
         $user = new User\User();
         $user->setDb($this->di->get("dbqb"));
+        if ($isUserTaken->id == null) {
+            $page->add("hab/login/default", ["error" => "Wrong username or password."]);
+            return $page->render(["title" => "User login"]);
+        }
         if (!$user->verifyPassword($username, $password)) {
-            return "username or password wrong";
+            $page->add("hab/login/default", ["error" => "Wrong username or password."]);
+            return $page->render(["title" => "User login"]);
         }
         $session->set("user", ["user" => $username, "id" => $user->id]);
 
@@ -111,6 +120,9 @@ class UserController implements ContainerInjectableInterface
         $response = $this->di->get("response");
         $session = $this->di->get("session");
         $page = $this->di->get("page");
+        // var_dump(get_class_methods($response));
+        // var_dump(get_class_methods($page));
+        // die();
         $userSession = $session->get("user");
         if (!$userSession["id"]) {
             return $response->redirect("user/login");
@@ -126,9 +138,10 @@ class UserController implements ContainerInjectableInterface
     public function editActionPost()
     {
         $session = $this->di->get("session");
-        $userSession = $session->get("user");
         $response = $this->di->get("response");
         $request = $this->di->get("request");
+        $page = $this->di->get("page");
+        $userSession = $session->get("user");
         $password = $request->getPost("password");
         $quote = $request->getPost("quote");
         $gravatar = $request->getPost("gravatar");
@@ -139,8 +152,8 @@ class UserController implements ContainerInjectableInterface
         $p2u = new Point_2_User\Point_2_User();
         $p2u->setDb($this->di->get("dbqb"));
         $p2u->user_id = $user->id;
-        if (strpos($gravatar, $gravPattern) != 0) {
-            return false;
+        if (strpos($gravatar, $gravPattern) === false) {
+            return $response->redirect("user/edit");
         }
         if ($password > 1) {
             $user->setPassword($password);

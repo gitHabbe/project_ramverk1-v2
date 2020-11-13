@@ -9,6 +9,7 @@ namespace Anax\View;
 
 <div>
     <form action="<?= $this->di->url->create("thread/new") ?>" method="post">
+    <div class="topic">
         <label for="topic">Topic</label><input type="text" name="topic">
         <select name="tag" id="tag-select">
             <option value=""></option>
@@ -17,11 +18,12 @@ namespace Anax\View;
             <?php endforeach; ?>
         </select>
         <input readonly onkeydown="return false;" type="text" name="tags" id="tags">
-        <button id="clear-tags">Clear tags</button>
+    </div>
+        <button id="clear-tags" class="button orange">Clear tags</button>
         <br>
-        <label for="content">Content</label>
+        <label for="content">Content:</label>
         <textarea type="text" name="content"></textarea>
-        <button type="submit">Create thread</button>
+        <button type="submit" class="button green">Create thread</button>
     </form>
 </div>
 

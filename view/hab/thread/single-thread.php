@@ -16,7 +16,6 @@ foreach ($comments ?? [] as $comment) {
 }
 
 
-
 ?>
 
 <div class="thread">
@@ -43,20 +42,22 @@ foreach ($comments ?? [] as $comment) {
         <div class="content"><?= $my_html ?></div>
     </div>
 </div>
+
 <?php if($user->id) : ?>
     <div class="post-form">
         <form action="<?= $this->di->url->create("comment/new/" . $realThread->id) ?>" method="post">
+            <span>Reply to comment #</span>
             <input style="display:none;" value="<?= count($comments) ?>" type="text" name="commentsLen">
             <input type="text" placeholder="Ex: #4" name="replyTo">
-            <button type="submit">Post comment</button>
-            <textarea value="" name="comment" cols="30" rows="10">
-            </textarea>
+            <span>Comment</span>
+            <textarea value="" name="comment" cols="30" rows="10"></textarea>
+                <button type="submit" class="button orange">Post comment</button>
         </form>
     </div>
 <?php endif; ?>
-
 <div>
     <form action="<?= $this->di->url->create("thread/id/" . $realThread->id) ?>" method="get">
+        <span>Sort comment by: </span>
         <select name="sort" id="comment-sort" onchange="this.form.submit()">
             <option value=""></option>
             <option value="date">Date</option>
@@ -74,7 +75,7 @@ foreach ($comments ?? [] as $comment) {
                 <img src="<?= getGravatar($comments[$i]) ?>" alt="User Picture" class="picture">
                 <div class="user"><?= $comments[$i]->username ?></div>
             </a>
-            <?php if ($answer->id === null) : ?>
+            <?php if ($answer->id === null && $sessionUser["id"] === $thread->user_id) : ?>
                 <div class="comment-answerBtn">
                     <form action="<?= $this->di->url->create("comment/answer/") ?>" method="post">
                         <input style="display:none;" value="<?= $realThread->id ?>" type="text" name="threadid">

@@ -5613,7 +5613,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: Cambria, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Georgia, Times, "Times New Roman", serif;
   margin-top: 24px;
   margin-bottom: 24px;
 }
@@ -6921,7 +6921,7 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 }
 .rm-navbar {
   text-align: center;
-  font-family: Cambria, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Georgia, Times, "Times New Roman", serif;
   font-size: 1.5em;
   line-height: 0;
 }

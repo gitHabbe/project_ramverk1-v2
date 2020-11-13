@@ -180,6 +180,7 @@ class ThreadController implements ContainerInjectableInterface
             "tags" => $tags,
             "my_html" => $my_html,
             "answer" => $answer,
+            "sessionUser" => $sessionUser,
         ];
         $page->add("hab/thread/single-thread", $data);
 

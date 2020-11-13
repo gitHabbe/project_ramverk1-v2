@@ -123,6 +123,8 @@ img.responsive {
 @import "@desinax/link/less/next-previous.less";
 @import "@desinax/link/less/toc.less";
 
+@import url("https://fonts.googleapis.com/css2?family=Gudea:wght@400;700&family=Jura:wght@400;600;700&display=swap");
+
 //  breadcrumb.less
 .breadcrumb-list,
 .bullet-list {
@@ -179,7 +181,7 @@ img.responsive {
 
 .rm-navbar {
     text-align: center;
-    font-family: @fontFamilyCambria;
+    font-family: @fontFamilyJura;
     font-size: 1.5em;
     line-height: 0;
 }
@@ -204,8 +206,8 @@ img.responsive {
 @bgColorBody: #fff;
 @colorBody: #111;
 
-@fontFamilyHeadings: @fontFamilyCambria;
-@fontFamilyBody: @fontFamilyVerdana;
+@fontFamilyHeadings: @fontFamilyJura;
+@fontFamilyBody: @fontFamilyGudea;
 @fontFamilyCode: @fontFamilyCourier;
 
 @colorH1BorderBottom: #666; // Add to h4 also
@@ -327,7 +329,68 @@ img.responsive {
     }
 }
 
-.post-form {
+.post-form,
+.login-form {
+    max-width: 400px;
     margin: 0 auto;
-    max-width: 500px;
+
+    label,
+    input,
+    textarea {
+        display: block;
+        width: 100%;
+        font-size: 1em;
+        line-height: 1em * 2;
+        font-family: @fontFamilyJura;
+    }
+
+    input,
+    textarea {
+        border: none;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 2px;
+        background: #f8f4e5;
+        padding-left: 5px;
+        outline: none;
+    }
+}
+
+.button {
+    display: block;
+    margin: 0 auto;
+    line-height: 1em * 2;
+    padding: 0 20px;
+    margin-top: 10px;
+    border: none;
+    color: white;
+    letter-spacing: 2px;
+    transition: 0.2s all ease-in-out;
+    border-bottom: 2px solid;
+}
+
+.topic {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 130px;
+}
+
+.thread-item {
+    span > {
+        margin-right: 6px;
+    }
+    i {
+        margin-right: 2px;
+    }
+}
+
+.blue {
+    background-color: rgb(84, 168, 246);
+}
+
+.orange {
+    background: rgb(255, 145, 0);
+}
+
+.green {
+    background: rgb(7, 163, 1);
 }

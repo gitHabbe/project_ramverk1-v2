@@ -33,7 +33,7 @@ return [
             "template" => "anax/v2/header/site_logo",
             "data" => [
                 "class" => "large",
-                "siteLogo"      => "image/theme/leaf_256x256.png",
+                "siteLogo"      => "image/theme/homelander_100x100.png",
                 "siteLogoAlt"   => "Löv",
             ],
         ],
@@ -42,8 +42,8 @@ return [
             "template" => "anax/v2/header/site_logo_text",
             "data" => [
                 "homeLink"      => "",
-                "siteLogoText"  => "ramverk1",
-                "siteLogoTextIcon" => "image/theme/leaf_40x40.png",
+                "siteLogoText"  => "The Boys",
+                "siteLogoTextIcon" => "image/theme/homelander_100x100.png",
                 "siteLogoTextIconAlt" => "Löv-bild",
             ],
         ],

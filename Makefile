@@ -101,6 +101,17 @@ clean-cache:
 
 
 
+
+# target: reset-db              - Clean the database.
+.PHONY:  reset-db
+reset-db:
+	@$(call HELPTEXT,$@)
+	sqlite3 data/db.sqlite < sql/setup.sql
+	sqlite3 data/db.sqlite < sql/ddl.sql
+	sqlite3 data/db.sqlite < sql/insert.sql
+
+
+
 # target: clean-all               - Removes generated files and directories.
 .PHONY:  clean-all
 clean-all: clean clean-cache

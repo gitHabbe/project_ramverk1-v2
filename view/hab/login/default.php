@@ -20,4 +20,4 @@ namespace Anax\View;
     </form>
 </div>
 
-<p>Har du inte ett konto?? Klicka <a href="<?= $this->di->url->create("user/signup") ?>">här</a> för att registrera dig.</p>
+<p>Har du inte ett konto? Klicka <a href="<?= $this->di->url->create("user/signup") ?>">här</a> för att registrera dig.</p>

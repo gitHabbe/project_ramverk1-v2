@@ -18,7 +18,8 @@ INSERT INTO User ("username", "password", "quote") VALUES
     ('nlipsong', '1zg4LE3b', 'Up-sized system-worthy forecast'),
     ('qtomensonh', '92aWAi', 'Re-contextualized static collaboration'),
     ('gschuberti', 'utS3kZb3p6', 'Synergized actuating emulation'),
-    ('jbenyonj', 'RYSyhyPae', 'Team-oriented 3rd generation array')
+    ('jbenyonj', 'RYSyhyPae', 'Team-oriented 3rd generation array'),
+    ('testing', '$2y$10$Knz', 'Test quote')
 ;
 INSERT INTO Tag ("name") VALUES
     ("hero"),
@@ -30,49 +31,49 @@ INSERT INTO Tag ("name") VALUES
 ;
 
 INSERT INTO Thread ("user_id", "topic", "content") VALUES
-    (8, 'Quisque ut erat. Curabitur gravida nisi at nibh.', 'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.'),
-    (9, 'Nam dui.', 'Vestibulum sed magna at nunc commodo placerat. Praesent blandit. Nam nulla.'),
-    (2, 'In blandit ultrices enim.', 'Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus.'),
-    (7, 'In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.', 'Nullam sit amet turpis elementum ligula vehicula consequat.'),
-    (8, 'Morbi non lectus.', 'Curabitur gravida nisi at nibh. In hac habitasse platea dictumst.'),
-    (4, 'Curabitur gravida nisi at nibh.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus.'),
-    (10, 'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus.', 'Donec semper sapien a libero. Nam dui.'),
-    (9, 'Sed ante. Vivamus tortor.', 'Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat. Praesent blandit.'),
-    (5, 'Aenean sit amet justo.', 'Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.'),
-    (9, 'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus. Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio.'),
-    (4, 'Aenean sit amet justo. Morbi ut odio.', 'Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus. Pellentesque at nulla. Suspendisse potenti. Cras in purus eu magna vulputate luctus.'),
-    (8, 'Morbi vel lectus in quam fringilla rhoncus. Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis.', 'Praesent blandit lacinia erat.'),
-    (3, 'Proin interdum mauris non ligula pellentesque ultrices.', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin interdum mauris non ligula pellentesque ultrices.'),
-    (7, 'Vivamus tortor. Duis mattis egestas metus.', 'Proin at turpis a pede posuere nonummy.'),
-    (2, 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur convallis.', 'Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla.'),
-    (2, 'Cras in purus eu magna vulputate luctus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi.'),
-    (10, 'Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue.', 'Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue.'),
-    (1, 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla dapibus dolor vel est.', 'Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.'),
-    (4, 'Aliquam quis turpis eget elit sodales scelerisque.', 'Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.'),
-    (5, 'Integer ac leo. Pellentesque ultrices mattis odio.', 'In quis justo. Maecenas rhoncus aliquam lacus. Morbi quis tortor id nulla ultrices aliquet. Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo.')
+    (8, 'Vad heter homelander?', 'Vilket namn var det homelander hade?'),
+    (9, 'Butcher.', 'Hur hittade Butcher Hughie?'),
+    (2, 'Seven', 'Har Homelander alltid varit medlem i The Seven?'),
+    (7, 'The boys', 'Hur länge har The Boys slagits mot The Seven?'),
+    (8, 'Doktorn', 'Varför experimenterade doktorn på barn?'),
+    (4, 'Smart', 'Det var smart av the boys att missleda Homelander the bomber, tycker ni inte?'),
+    (10, 'Förnamn', 'Vad heter Butcher i förnamn?'),
+    (9, 'konflikt', 'Varför är det en konflikt mellan Frenchie och MM?'),
+    (5, 'Robin', 'Har vi sett den sista illusionen av Robin nu?'),
+    (9, 'Huvuden', 'Vem tror ni spränger alla huvuden?'),
+    (4, 'Hur?', 'Hur kan huden på Translucant inte skadas?'),
+    (8, 'Brådska', 'Varför kunde inte A-Train stanna? Vad tror ni han hade i väskan?'),
+    (3, 'Planet', 'Hur kommer det sig att Homelander inte ens försökte lyfta planet?'),
+    (7, 'Hur många har Seven dödat', 'Titeln. Vad tror ni?'),
+    (2, 'Ny hjälte', 'Vad tror ni att den nya "hjälten" kommer har för krafter?'),
+    (2, 'Ny säsong', 'Längtar till nästa säsong. Tagga'),
+    (10, 'A-Train', 'Vad geter A-Train'),
+    (1, 'Vem', 'Vem startade the boys gruppen'),
+    (4, 'Hur', 'Hur kan Vought kontrollera dom på det viset?'),
+    (5, 'Becca', 'Varför försökte inte Becca kontakta Butcher?')
 ;
 
 INSERT INTO Comment ("thread_id", "user_id", "name") VALUES
-    (5, 9, 'Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl.'),
-    (9, 5, 'Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo. Pellentesque ultrices mattis odio.'),
-    (3, 3, 'Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem. Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit. Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque. Duis bibendum.'),
-    (2, 6, 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.'),
-    (6, 3, 'Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio. Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.'),
-    (12, 7, 'Maecenas pulvinar lobortis est. Phasellus sit amet erat.'),
-    (1, 4, 'Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis.'),
-    (2, 6, 'Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus. Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla.'),
-    (9, 3, 'Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros. Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat. In congue. Etiam justo.'),
-    (4, 9, 'Donec dapibus. Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.'),
-    (10, 7, 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus. Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.'),
-    (6, 4, 'Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem. Sed sagittis.'),
-    (16, 10, 'Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est. Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum. Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.'),
-    (14, 7, 'Phasellus in felis. Donec semper sapien a libero. Nam dui. Proin leo odio, porttitor id, consequat in, consequat ut, nulla. Sed accumsan felis. Ut at dolor quis odio consequat varius. Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.'),
-    (17, 10, 'Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui. Maecenas tristique, est et tempus semper, est quam pharetra magna, ac consequat metus sapien ut nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Mauris viverra diam vitae quam. Suspendisse potenti. Nullam porttitor lacus at turpis. Donec posuere metus vitae ipsum. Aliquam non mauris. Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet.'),
-    (9, 9, 'Praesent blandit lacinia erat. Vestibulum sed magna at nunc commodo placerat. Praesent blandit. Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus.'),
-    (7, 3, 'Nam nulla. Integer pede justo, lacinia eget, tincidunt eget, tempus vel, pede. Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem. Fusce consequat. Nulla nisl. Nunc nisl. Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus.'),
-    (12, 8, 'Vivamus vestibulum sagittis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vel augue. Vestibulum rutrum rutrum neque. Aenean auctor gravida sem. Praesent id massa id nisl venenatis lacinia.'),
-    (5, 2, 'Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst. Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat. Curabitur gravida nisi at nibh. In hac habitasse platea dictumst. Aliquam augue quam, sollicitudin vitae, consectetuer eget, rutrum at, lorem.'),
-    (2, 2, 'Duis at velit eu est congue elementum. In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo. Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.')
+    (5, 9, 'Kanske blev rikligt belönt'),
+    (9, 5, 'Förmodligen. Han har nog släppt det nu.'),
+    (3, 3, 'Det tror jag inte. Det skapades nog före han var född.'),
+    (2, 6, 'Väldigt bra fråga!'),
+    (6, 3, 'Otroligt smart!'),
+    (12, 7, 'Kanske ar drågad på Comp-V och hade det i väskan'),
+    (1, 4, 'John tror jag dom nämnde i något avsnitt. Kanske för John Doe'),
+    (2, 6, 'Han spionerade nog på allt relaterat till Vought'),
+    (9, 3, 'Jag tror också det.'),
+    (4, 9, 'Dom har nog inte uppgett det än'),
+    (10, 7, 'Det får man veta i season 2'),
+    (6, 4, 'Detta är nog inte nytt till dom'),
+    (16, 10, 'Lääääängtar'),
+    (14, 7, 'Säkert tusentals totalt'),
+    (17, 10, 'Tror inte dom nämnt det i serien, men det finns information på nätet.'),
+    (9, 9, 'Håller med'),
+    (7, 3, 'William!'),
+    (12, 8, 'Jaa, såklart!'),
+    (5, 2, 'Han kanske var tvingad!'),
+    (2, 2, 'Förmodligen via nyheterna bara.')
 ;
 
 INSERT INTO Tag_2_Thread ("thread_id", "tag_id") VALUES
@@ -80,14 +81,21 @@ INSERT INTO Tag_2_Thread ("thread_id", "tag_id") VALUES
     (1, 5),
     (2, 2),
     (1, 4),
+    (4, 1),
     (2, 5),
+    (5, 2),
     (6, 2),
     (6, 1),
+    (1, 6),
     (14, 3),
+    (14, 1),
     (11, 3),
     (18, 6),
     (5, 6)
 ;
 
-SELECT * FROM User;
-SELECT * FROM Thread;
+-- SELECT * FROM User;
+-- SELECT * FROM Thread;
+
+DROP TRIGGER IF EXISTS update_user_and_thread_points;
+DROP TRIGGER IF EXISTS update_user_and_comment_points;

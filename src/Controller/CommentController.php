@@ -54,9 +54,10 @@ class CommentController implements ContainerInjectableInterface
     {
         $request = $this->di->get("request");
         $session = $this->di->get("session");
+        $response = $this->di->get("response");
         $user = $session->get("user", null);
         if ($user === null) {
-            return "AUTH";
+            return $response->redirect("user/login");
         }
         $vote = $request->getPost("comment-vote");
         $thread_id = $request->getPost("threadid");
@@ -65,7 +66,7 @@ class CommentController implements ContainerInjectableInterface
         $p2c->setDb($this->di->get("dbqb"));
         $p2c = $p2c->findWhere("comment_id = ? AND user_id = ?", [$id, $user["id"]]);
         if ($vote === intval($p2c->positive)) {
-            return "CANT";
+            return $response->redirect("thread/id/" . $thread_id);
         }
         $comment = new Comment\Comment();
         $comment->setDb($this->di->get("dbqb"));

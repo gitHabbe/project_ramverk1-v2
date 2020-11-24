@@ -10,6 +10,8 @@ DROP TABLE IF EXISTS Point_2_Thread;
 DROP TABLE IF EXISTS Point_2_Comment;
 DROP TABLE IF EXISTS Answer;
 DROP TABLE IF EXISTS Point_2_User;
+DROP TRIGGER IF EXISTS update_user_and_thread_points;
+DROP TRIGGER IF EXISTS update_user_and_comment_points;
 
 
 
@@ -115,3 +117,34 @@ CREATE TABLE Answer (
     FOREIGN KEY(thread_id) REFERENCES Thread(id),
     FOREIGN KEY(comment_id) REFERENCES Comment(id)
 );
+
+
+-- TRIGGERS
+
+CREATE TRIGGER IF NOT EXISTS update_user_and_thread_points
+AFTER INSERT ON Thread
+BEGIN
+    INSERT INTO Point_2_User ("amount", "user_id")
+    VALUES (5, NEW.user_id);
+
+    UPDATE Thread
+    SET points = 1
+    WHERE id = NEW.id;
+
+    INSERT INTO Point_2_Thread ("positive", "thread_id", "user_id")
+    VALUES (1, NEW.id, NEW.user_id);
+END;
+
+CREATE TRIGGER IF NOT EXISTS update_user_and_comment_points
+AFTER INSERT ON Comment
+BEGIN
+    INSERT INTO Point_2_User ("amount", "user_id")
+    VALUES (3, NEW.user_id);
+
+    UPDATE Comment
+    SET points = 1
+    WHERE id = NEW.id;
+
+    INSERT INTO Point_2_Comment ("positive", "comment_id", "user_id")
+    VALUES (1, NEW.id, NEW.user_id);
+END;

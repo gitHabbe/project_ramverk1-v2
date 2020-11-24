@@ -1,3 +1,3 @@
-#### Footer col 1
+#### Taggar
 
-Med brödtext i ett stycke som säger något trevligt om just detta block, eller kanske en lista av länkar.
+Glöm inte att spana in alla taggar om The Boys.

@@ -5387,14 +5387,14 @@ h4:hover .header-anchor {
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: local('Gudea'), url(https://fonts.gstatic.com/s/gudea/v10/neIFzCqgsI0mp-CP.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/gudea/v10/neIFzCqgsI0mp-CP.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Gudea';
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  src: local('Gudea Bold'), local('Gudea-Bold'), url(https://fonts.gstatic.com/s/gudea/v10/neIIzCqgsI0mp9gz26WG.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/gudea/v10/neIIzCqgsI0mp9gz26WG.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Jura';
@@ -7046,7 +7046,7 @@ a.rm-button.rm-clicked .rm-button-face-2 {
   color: #4797ff;
 }
 .isAnswer {
-  border: green 1px solid;
+  border: green 3px solid;
 }
 .tag-list {
   list-style-type: none;
@@ -7119,7 +7119,7 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 }
 .site-logo img {
   width: 100px;
-  border-radius: 20px;
+  border-radius: 30px;
   z-index: -2;
 }
 .site-logo-text {
@@ -7133,6 +7133,11 @@ a.rm-button.rm-clicked .rm-button-face-2 {
 }
 .green {
   background: #07a301;
+}
+.logout {
+  position: absolute;
+  left: -100px;
+  bottom: 20px;
 }
 @media screen and (max-width: 800px) {
   .site-logo {

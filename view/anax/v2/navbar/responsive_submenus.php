@@ -15,12 +15,25 @@ $html = $navbar->createMenuWithSubMenus($navbarConfig);
 
 $classes = "rm-navbar-max rm-navbar rm-max rm-swipe-right " . ( $class ?? null);
 
+$user = $this->di->get("session")->get("user");
+// var_dump($user);
+
+// var_dump();
 
 ?><!-- menu wrapper -->
 <div <?= classList($classes) ?>>
     <!-- memu click button -->
     <div class="rm-small-wrapper">
         <ul class="rm-small">
+            <?php if (isset($user)) : ?>
+                <span class="logout">
+                    <a href="<?= $this->di->url->create("user/logout") ?>">Logout</a>
+                </span>
+            <?php else: ?>
+                <span class="logout">
+                    <a href="<?= $this->di->url->create("user/login") ?>">Sign in</a>
+                </span>
+            <?php endif; ?>
             <li><a id="rm-menu-button" class="rm-button" href="#">
                 <i class="fas fa-bars rm-button-face-1"></i>
                 <i class="fas fa-times rm-button-face-2"></i>

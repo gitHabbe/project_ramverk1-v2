@@ -1,3 +1,3 @@
-#### Footer col 3
+#### BTH
 
-Med brödtext i ett stycke som säger något trevligt om just detta block, eller kanske en lista av länkar.
+Kursen finns att inspektera via [https://dbwebb.se/kurser/ramverk1-v2/](https://dbwebb.se/kurser/ramverk1-v2/)

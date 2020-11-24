@@ -7,10 +7,14 @@ foreach ($p2u ?? [] as $point) {
     $p2uTotal += intval($point->amount);
 }
 
+function getGravatarr($user) {
+    if ($user->gravatar === null || $user->gravatar === "") {
+        return "https://www.gravatar.com/avatar/00000000000000000000000000000000";
+    }
+    return $user->gravatar;
+}
 
-// var_dump($p2u);
-// var_dump($p2t);
-// var_dump($p2c);
+// var_dump($user);
 
 ?>
 
@@ -19,6 +23,12 @@ foreach ($p2u ?? [] as $point) {
 <p>Profilsida för användare: <b><?= $user->username ?></b></p>
 
 <p>Rykte: <?= $p2uTotal ?>!</p>
+
+<img src="<?= getGravatarr($user) ?>" alt="User Picture" class="picture">
+
+<?php if (strlen($user->quote) > 0) : ?>
+    <h6>Citat: "<?= $user->quote ?>"</h6>
+<?php endif; ?>
 
 <p>Ryktet är baserat på skapade trådar och kommenterar.</p>
 <p>Man får även poäng genom att rösta och ge korrekt svar.</p>

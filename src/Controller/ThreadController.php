@@ -193,7 +193,8 @@ class ThreadController implements ContainerInjectableInterface
         $session = $this->di->get("session");
         $user = $session->get("user", null);
         if ($user === null) {
-            return "AUTH";
+            $response = $this->di->get("response");
+            return $response->redirect("thread/id/" . $id);
         }
         $vote = $request->getPost("thread-vote");
         $vote = $vote === "up" ? 1 : -1;
@@ -201,7 +202,8 @@ class ThreadController implements ContainerInjectableInterface
         $p2t->setDb($this->di->get("dbqb"));
         $p2t = $p2t->findWhere("thread_id = ? AND user_id = ?", [$id, $user["id"]]);
         if ($vote === intval($p2t->positive)) {
-            return "CANT";
+            $response = $this->di->get("response");
+            return $response->redirect("thread/id/" . $id);
         }
         $thread = new Thread\Thread();
         $thread->setDb($this->di->get("dbqb"));

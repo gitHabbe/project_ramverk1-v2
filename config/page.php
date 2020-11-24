@@ -18,7 +18,8 @@ return [
             "htmlClass" => null,
             "lang" => "sv",
             "stylesheets" => [
-                "css/dbwebb-se.min.css",
+                // "css/dbwebb-se.min.css",
+                "css/the-boys_v1.min.css",
             ],
             "javascripts" => [
                 "js/responsive-menu.js",
@@ -33,7 +34,8 @@ return [
             "template" => "anax/v2/header/site_logo",
             "data" => [
                 "class" => "large",
-                "siteLogo"      => "image/theme/homelander_100x100.png",
+                // "siteLogo"      => "image/theme/homelander_100x100.png",
+                "siteLogo"      => "image/theme/homelander_256x256.png",
                 "siteLogoAlt"   => "Löv",
             ],
         ],
@@ -43,7 +45,8 @@ return [
             "data" => [
                 "homeLink"      => "",
                 "siteLogoText"  => "The Boys",
-                "siteLogoTextIcon" => "image/theme/homelander_100x100.png",
+                // "siteLogoTextIcon" => "image/theme/homelander_100x100.png",
+                "siteLogoTextIcon" => "image/theme/homelander_40x40.png",
                 "siteLogoTextIconAlt" => "Löv-bild",
             ],
         ],

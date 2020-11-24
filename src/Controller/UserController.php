@@ -38,7 +38,8 @@ class UserController implements ContainerInjectableInterface
     {
         $response = $this->di->get("response");
         $session = $this->di->get("session");
-        if ($session->get("user")["id"]) {
+        // if ($session->get("user")["id"]) {
+        if ($session->get("user") != null) {
             return $response->redirect("");
         }
         $page = $this->di->get("page");

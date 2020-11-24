@@ -43,7 +43,7 @@ class ThreadControllerTest extends TestCase
     {
         $res = $this->controller->indexActionGet();
         $res = $res->getBody();
-        $exp = "Nam dui.";
+        $exp = "Hur många har Seven dödat";
         // $session->destroy();
         $this->assertStringContainsString($exp, $res);
     }
@@ -79,7 +79,7 @@ class ThreadControllerTest extends TestCase
     {
         $res = $this->controller->idActionGet(1);
         $res = $res->getBody();
-        $exp = "Morbi sem mauris";
+        $exp = "Vad heter homelander?";
         $this->assertStringContainsString($exp, $res);
     }
 

@@ -9,7 +9,6 @@ function getGravatar($user) {
     return $user->gravatar;
 }
 
-// $total = 0;
 $total = $thread->points;
 foreach ($comments ?? [] as $comment) {
     $total += $comment->points;    
@@ -43,7 +42,7 @@ foreach ($comments ?? [] as $comment) {
     </div>
 </div>
 
-<?php if($user->id) : ?>
+<?php if($sessionUser != null) : ?>
     <div class="post-form">
         <form action="<?= $this->di->url->create("comment/new/" . $realThread->id) ?>" method="post">
             <span>Reply to comment #</span>
@@ -54,12 +53,14 @@ foreach ($comments ?? [] as $comment) {
                 <button type="submit" class="button orange">Post comment</button>
         </form>
     </div>
+<?php else: ?>
+    <h4>Log in to post comments</h4>
 <?php endif; ?>
 <div>
     <form action="<?= $this->di->url->create("thread/id/" . $realThread->id) ?>" method="get">
-        <span>Sort comment by: </span>
+        <span>Sort comments by: </span>
         <select name="sort" id="comment-sort" onchange="this.form.submit()">
-            <option value=""></option>
+            <option value="">Sort by</option>
             <option value="date">Date</option>
             <option value="points">Points</option>
         </select>
@@ -75,7 +76,7 @@ foreach ($comments ?? [] as $comment) {
                 <img src="<?= getGravatar($comments[$i]) ?>" alt="User Picture" class="picture">
                 <div class="user"><?= $comments[$i]->username ?></div>
             </a>
-            <?php if ($answer->id === null && $sessionUser["id"] === $thread->user_id) : ?>
+            <?php if ($answer->id === null && $sessionUser != null && $sessionUser["id"] === $thread->user_id) : ?>
                 <div class="comment-answerBtn">
                     <form action="<?= $this->di->url->create("comment/answer/") ?>" method="post">
                         <input style="display:none;" value="<?= $realThread->id ?>" type="text" name="threadid">
@@ -108,7 +109,7 @@ foreach ($comments ?? [] as $comment) {
                     <span id="<?= $comment->num ?>">#<?= $comment->num ?></span>
                 </a>
                 <?php if ($comment->reply_num) : ?>
-                    <span>This is a reply to comment -><a href="#<?= $comment->reply_num ?>">#<?= $comment->reply_num ?></a></span>
+                    <span>This is a reply to comment -> <a href="#<?= $comment->reply_num ?>">#<?= $comment->reply_num ?></a></span>
                 <?php endif; ?>
             </div>
             <?= $comment->name ?>

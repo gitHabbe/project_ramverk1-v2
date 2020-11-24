@@ -45,7 +45,8 @@ class UserControllerTest extends TestCase
         $session->set("user", ["id" => 1, "user" => "testing"]);
         $res = $this->controller->indexActionGet();
         $res = $res->getBody();
-        $exp = "Edit your information";
+        // $exp = "Edit your information";
+        $exp = "Dashboard";
         $session->destroy();
         $this->assertStringContainsString($exp, $res);
     }
@@ -67,9 +68,8 @@ class UserControllerTest extends TestCase
     {
         $res = $this->controller->loginActionGet();
         $res = $res->getBody();
-        $exp = "<h1>LOGIN</h1>";
+        $exp = "<h1>Logga in!</h1>";
         $this->assertStringContainsString($exp, $res);
-        
     }
     
     /**
@@ -92,14 +92,16 @@ class UserControllerTest extends TestCase
     {
         $request = $this->di->get("request");
         $request->setPost("username", "testing");
-        $request->setPost("password", "testing");
+        $request->setPost("password", 'a');
         $res = $this->controller->loginActionPost();
         $res = $res->getBody();
-        $this->assertNull($res);
+        $exp = "Wrong username or password";
+        $this->assertStringContainsString($exp, $res);
+        // $this->assertNull($res);
     }
     
     /**
-     * Test the route "user/signup" happy.
+     * Test the route "user/signup" sad.
      */
     public function testSignupActionPost()
     {
@@ -109,7 +111,9 @@ class UserControllerTest extends TestCase
         $request->setPost("password2", "testin");
         $res = $this->controller->signupActionPost();
         $res = $res->getBody();
-        $this->assertNull($res);
+        $exp = "Passwords doesnt match eachother.";
+        // $this->assertNull($res);
+        $this->assertStringContainsString($exp, $res);
     }
 
     public function testLogoutAction()
@@ -123,7 +127,7 @@ class UserControllerTest extends TestCase
     public function testEditAction()
     {
         $session = $this->di->get("session");
-        $session->set("user", ["id" => 1, "user" => "testing"]);
+        $session->set("user", ["id" => 21, "user" => "testing"]);
         $res = $this->controller->editActionGet();
         $res = $res->getBody();
         $exp = "<h1>Edit user data</h1>";
